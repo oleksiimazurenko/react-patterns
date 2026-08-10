@@ -139,7 +139,7 @@ export default function Home() {
       </section>
 
       {/* accordion */}
-      <section className="mx-auto max-w-3xl px-6 py-20">
+      <section className="mx-auto max-w-5xl px-6 py-20">
         <SectionHeading id="accordion" kicker="recipe 04" title="accordion" />
         <p className="mb-8 max-w-2xl text-neutral-400">
           Native <code className="text-emerald-300">&lt;details&gt;</code> with a smooth
