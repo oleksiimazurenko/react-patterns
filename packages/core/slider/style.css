@@ -28,6 +28,10 @@
 .slider > * {
   flex: 0 0 var(--slider-item, 85%);
   scroll-snap-align: center;
+  /* Force a stop at every slide, so a button click / swipe advances ONE slide
+     at a time even when several are visible (set to `normal` to allow flinging
+     past multiple). */
+  scroll-snap-stop: var(--slider-snap-stop, always);
 }
 
 @supports (scroll-marker-group: after) {

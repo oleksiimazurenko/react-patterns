@@ -7,6 +7,12 @@ export interface SliderProps {
   gap?: string
   /** Color of the pagination dots. Defaults to `currentColor`. */
   dotColor?: string
+  /**
+   * Whether every slide is a mandatory snap stop. `"always"` (default) advances
+   * one slide per button click / swipe even when several are visible; `"normal"`
+   * lets a fling pass multiple.
+   */
+  snapStop?: 'always' | 'normal'
   /** Element/tag for the track. Default "ul". */
   as?: ElementType
   className?: string
@@ -27,6 +33,7 @@ export function Slider({
   itemSize,
   gap,
   dotColor,
+  snapStop,
   as: Tag = 'ul',
   className,
   style,
@@ -36,6 +43,7 @@ export function Slider({
   if (itemSize) vars['--slider-item'] = itemSize
   if (gap) vars['--slider-gap'] = gap
   if (dotColor) vars['--slider-dot'] = dotColor
+  if (snapStop) vars['--slider-snap-stop'] = snapStop
 
   return (
     <Tag

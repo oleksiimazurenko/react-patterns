@@ -253,7 +253,12 @@ import '@oleksiimazurenko/patterns-core/slider/style.css'
 | `itemSize` | `85%` | Flex-basis of each slide (e.g. `"70%"`, `"20rem"`). |
 | `gap` | `1rem` | Gap between slides. |
 | `dotColor` | `currentColor` | Color of the pagination dots. |
+| `snapStop` | `"always"` | `"always"` advances one slide per click/swipe (even when several show); `"normal"` lets a fling pass multiple. |
 | `as` | `"ul"` | Element/tag for the track. |
+
+Slides-per-view is just `itemSize` (the `--slider-item` var): a fraction like
+`"33.333%"` shows 3, a fixed width like `"18rem"` shows as many as fit, or set it
+responsively per breakpoint (`[--slider-item:82%] sm:[--slider-item:46%] lg:[--slider-item:31%]`).
 
 The track is CSS scroll-snap — swipe/trackpad works everywhere, no `'use client'`.
 The pagination dots (with an active state) and the prev/next buttons are the CSS
