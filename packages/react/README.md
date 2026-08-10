@@ -17,8 +17,9 @@ npm install @oleksiimazurenko/react-patterns @oleksiimazurenko/patterns-core
 | Import | What it does |
 | ------ | ------------ |
 | `@oleksiimazurenko/react-patterns/fit-text` | `<FitText>` — text that scales to its container with zero JS. |
+| `@oleksiimazurenko/react-patterns/parallax` | `<Parallax>` — scroll parallax with zero JS (`animation-timeline: view()`). |
 
-_More on the way: parallax, accordion, slider, analytics (one delegated listener), …_
+_More on the way: accordion, slider, analytics (one delegated listener), …_
 
 ## fit-text
 
@@ -39,6 +40,34 @@ import '@oleksiimazurenko/patterns-core/fit-text/style.css'
 | `max`   | `4.5rem` | Desktop ceiling. Number → px, string → as-is.          |
 | `slope` | `10`     | Fluid slope — grows this % of the container width.     |
 | `as`    | `"div"`  | Container element/tag.                                  |
+
+## parallax
+
+```tsx
+import { Parallax } from '@oleksiimazurenko/react-patterns/parallax'
+import '@oleksiimazurenko/patterns-core/parallax/style.css'
+
+// Simple: travels ±20px along Y across the viewport, zero JS.
+<Parallax amplitude={20}>
+  <img src="/hero.jpg" alt="" />
+</Parallax>
+
+// Explicit range, horizontal, with a fade:
+<Parallax axis="x" from={40} to={-40} opacityFrom={0} opacityTo={1}>
+  <Card />
+</Parallax>
+```
+
+| Prop          | Default | Description                                                       |
+| ------------- | ------- | ----------------------------------------------------------------- |
+| `amplitude`   | `0`     | Shorthand: travels `+amplitude → -amplitude` px along `axis`.     |
+| `axis`        | `"y"`   | Axis of travel (`"x"` or `"y"`).                                  |
+| `from` / `to` | —       | Explicit start/end offset in px. Overrides `amplitude`.          |
+| `opacityFrom` / `opacityTo` | — | Fade from/to across the scroll range.                     |
+| `as`          | `"div"` | Element/tag to render.                                            |
+
+Renders plain server HTML (no `'use client'`). Unsupported browsers (Safari < 26,
+Firefox without the flag) and `prefers-reduced-motion` show the element at rest.
 
 ## License
 

@@ -12,8 +12,9 @@ as possible. Each recipe ships as its own subpath so you import only what you us
 | Import | What it does |
 | ------ | ------------ |
 | `@oleksiimazurenko/patterns-core/fit-text/style.css` | Text that scales to its container — container-query `cqi` + `clamp()`, zero JS. |
+| `@oleksiimazurenko/patterns-core/parallax/style.css` | Scroll parallax via `animation-timeline: view()` — no scroll listener, zero JS. |
 
-_More on the way: parallax, accordion, slider, …_
+_More on the way: accordion, slider, …_
 
 ## fit-text
 

@@ -39,6 +39,11 @@
       "types": "./dist/fit-text/index.d.ts",
       "import": "./dist/fit-text/index.js",
       "require": "./dist/fit-text/index.cjs"
+    },
+    "./parallax": {
+      "types": "./dist/parallax/index.d.ts",
+      "import": "./dist/parallax/index.js",
+      "require": "./dist/parallax/index.cjs"
     }
   },
   "sideEffects": [

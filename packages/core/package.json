@@ -25,13 +25,15 @@
     "url": "https://github.com/oleksiimazurenko/react-patterns/issues"
   },
   "exports": {
-    "./fit-text/style.css": "./fit-text/style.css"
+    "./fit-text/style.css": "./fit-text/style.css",
+    "./parallax/style.css": "./parallax/style.css"
   },
   "sideEffects": [
     "*.css"
   ],
   "files": [
     "fit-text",
+    "parallax",
     "README.md"
   ],
   "publishConfig": {

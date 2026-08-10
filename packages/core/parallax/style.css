@@ -1,0 +1,34 @@
+/**
+ * Scroll parallax with ZERO runtime JS — a pure CSS scroll-driven animation.
+ *
+ * The element animates along its own `view()` timeline: it sits at the `*-from`
+ * offset the moment it enters the viewport and reaches `*-to` as it leaves.
+ * No scroll listener, no IntersectionObserver, no rAF — the compositor drives
+ * it. Renders correctly on first paint and is safe during SSR.
+ *
+ * The animation is applied ONLY where `animation-timeline` is supported and the
+ * user hasn't asked for reduced motion, so unsupported engines (Safari < 26,
+ * Firefox without the flag) simply show the element at rest — no offset, no jump.
+ *
+ * Technique popularized by @ouvarov/scroll-parallax (MIT); reimplemented here.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .parallax {
+      animation: parallax linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+@keyframes parallax {
+  from {
+    translate: var(--parallax-x-from, 0px) var(--parallax-y-from, 0px);
+    opacity: var(--parallax-opacity-from, 1);
+  }
+  to {
+    translate: var(--parallax-x-to, 0px) var(--parallax-y-to, 0px);
+    opacity: var(--parallax-opacity-to, 1);
+  }
+}

@@ -22,7 +22,7 @@ works during SSR.
 | Recipe | Status | Idea |
 | ------ | ------ | ---- |
 | **fit-text** | ✅ ready | Text scales to its container — container-query `cqi` + `clamp()`, zero JS. |
-| **parallax** | 🚧 planned | Scroll parallax with `animation-timeline: scroll()` — no scroll listener. |
+| **parallax** | ✅ ready | Scroll parallax with `animation-timeline: view()` — no scroll listener, no JS. |
 | **accordion** | 🚧 planned | Open/close via `<details>` / `:has()` — no state, no JS. |
 | **slider** | 🚧 planned | Carousel with CSS scroll-snap — no library. |
 | **analytics** | 🚧 planned | One delegated `document` listener + `data-*` contracts — components stay server HTML. |
@@ -42,6 +42,13 @@ Monorepo: pnpm workspaces + Turborepo + Changesets.
 1. `packages/core/<recipe>/style.css` (pure CSS) + a subpath export in `packages/core/package.json`.
 2. `packages/react/src/<recipe>/` (component + `index.ts`), add its entry to `tsup.config.ts` and a subpath export in `packages/react/package.json`.
 3. Re-export it from `packages/react/src/index.ts`.
+
+## Credits
+
+The **parallax** recipe uses the CSS `animation-timeline: view()` technique
+popularized by [`@ouvarov/scroll-parallax`](https://www.npmjs.com/package/@ouvarov/scroll-parallax)
+(MIT, by Oleksandr Uvarov). The implementation here is written from scratch; if
+you need a full-featured, battle-tested version, use that package directly.
 
 ## License
 
