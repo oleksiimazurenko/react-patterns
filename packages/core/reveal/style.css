@@ -1,0 +1,42 @@
+/**
+ * Reveal on scroll with ZERO runtime JS — the element fades and rises into
+ * place (with a subtle overshoot) as it scrolls into view. Driven by a `view()`
+ * timeline over the entry range, so there is no IntersectionObserver, no scroll
+ * listener, no state — just CSS. Correct during SSR, no hydration cost.
+ *
+ * The hidden state (`opacity: 0`) lives ONLY inside the keyframes, and the
+ * animation is applied ONLY where `animation-timeline` is supported AND motion
+ * is allowed. So unsupported engines (Safari < 26, Firefox without the flag)
+ * and `prefers-reduced-motion` users see the content fully visible in place —
+ * it never stays hidden.
+ */
+@property --reveal-distance { syntax: "<length>"; inherits: true; initial-value: 24px; }
+@property --reveal-scale    { syntax: "<number>"; inherits: true; initial-value: 0.96; }
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    translate: 0 var(--reveal-distance);
+    scale: var(--reveal-scale);
+  }
+  60% {
+    opacity: 1;
+    translate: 0 -4px;
+    scale: 1.01;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal 1ms linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+  }
+}

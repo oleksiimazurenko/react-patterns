@@ -26,7 +26,8 @@
   },
   "exports": {
     "./fit-text/style.css": "./fit-text/style.css",
-    "./parallax/style.css": "./parallax/style.css"
+    "./parallax/style.css": "./parallax/style.css",
+    "./reveal/style.css": "./reveal/style.css"
   },
   "sideEffects": [
     "*.css"
@@ -34,6 +35,7 @@
   "files": [
     "fit-text",
     "parallax",
+    "reveal",
     "README.md"
   ],
   "publishConfig": {

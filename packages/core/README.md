@@ -13,6 +13,7 @@ as possible. Each recipe ships as its own subpath so you import only what you us
 | ------ | ------------ |
 | `@oleksiimazurenko/patterns-core/fit-text/style.css` | Text that scales to its container — container-query `cqi` + `clamp()`, zero JS. |
 | `@oleksiimazurenko/patterns-core/parallax/style.css` | Scroll parallax via `animation-timeline: view()` — no scroll listener, zero JS. |
+| `@oleksiimazurenko/patterns-core/reveal/style.css` | Fade-and-rise reveal on scroll via `view()` timeline — no IntersectionObserver, zero JS. |
 
 _More on the way: accordion, slider, …_
 

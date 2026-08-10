@@ -44,6 +44,11 @@
       "types": "./dist/parallax/index.d.ts",
       "import": "./dist/parallax/index.js",
       "require": "./dist/parallax/index.cjs"
+    },
+    "./reveal": {
+      "types": "./dist/reveal/index.d.ts",
+      "import": "./dist/reveal/index.js",
+      "require": "./dist/reveal/index.cjs"
     }
   },
   "sideEffects": [

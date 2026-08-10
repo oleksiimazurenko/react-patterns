@@ -18,6 +18,7 @@ npm install @oleksiimazurenko/react-patterns @oleksiimazurenko/patterns-core
 | ------ | ------------ |
 | `@oleksiimazurenko/react-patterns/fit-text` | `<FitText>` — text that scales to its container with zero JS. |
 | `@oleksiimazurenko/react-patterns/parallax` | `<Parallax>` — scroll parallax with zero JS (`animation-timeline: view()`). |
+| `@oleksiimazurenko/react-patterns/reveal` | `<Reveal>` — fade-and-rise into view on scroll, zero JS. |
 
 _More on the way: accordion, slider, analytics (one delegated listener), …_
 
@@ -79,6 +80,35 @@ import '@oleksiimazurenko/patterns-core/parallax/style.css'
 Renders plain server HTML (no `'use client'`). Unsupported browsers (Safari < 26,
 Firefox without the flag) and `prefers-reduced-motion` show the element at rest —
 no jump, no cleanup rule needed (the animation is gated behind `@supports`).
+
+## reveal
+
+```tsx
+import { Reveal } from '@oleksiimazurenko/react-patterns/reveal'
+import '@oleksiimazurenko/patterns-core/reveal/style.css'
+
+// Fades and rises into place as it scrolls into view — zero JS.
+<Reveal>
+  <Card />
+</Reveal>
+
+// Tune the entrance:
+<Reveal distance={40} scale={0.9} range="entry 0% cover 40%">
+  <Section />
+</Reveal>
+```
+
+| Prop | Default | Description |
+| ---- | ------- | ----------- |
+| `distance` | `24` | How far (px) the element rises from as it enters. |
+| `scale` | `0.96` | Initial scale it grows from. |
+| `range` | `entry 0% cover 25%` | Native CSS `animation-range`. |
+| `easing` | `linear` | Native CSS `animation-timing-function`. |
+| `as` | `"div"` | Element/tag to render. |
+
+Renders plain server HTML (no `'use client'`). The hidden state lives only in
+the keyframes, so unsupported browsers and `prefers-reduced-motion` show the
+content fully visible in place — it never stays hidden.
 
 ## License
 
