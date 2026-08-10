@@ -12,3 +12,5 @@ export {
   type TrackData,
   type RegisterAnalyticsOptions,
 } from './analytics'
+export { ScrollProgress, type ScrollProgressProps } from './scroll-progress'
+export { StickyShrink, type StickyShrinkProps } from './sticky-shrink'

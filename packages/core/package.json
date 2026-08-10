@@ -28,7 +28,9 @@
     "./fit-text/style.css": "./fit-text/style.css",
     "./parallax/style.css": "./parallax/style.css",
     "./reveal/style.css": "./reveal/style.css",
-    "./accordion/style.css": "./accordion/style.css"
+    "./accordion/style.css": "./accordion/style.css",
+    "./scroll-progress/style.css": "./scroll-progress/style.css",
+    "./sticky-shrink/style.css": "./sticky-shrink/style.css"
   },
   "sideEffects": [
     "*.css"
@@ -38,6 +40,8 @@
     "parallax",
     "reveal",
     "accordion",
+    "scroll-progress",
+    "sticky-shrink",
     "README.md"
   ],
   "publishConfig": {

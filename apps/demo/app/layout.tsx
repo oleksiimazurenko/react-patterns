@@ -5,10 +5,13 @@ import '@oleksiimazurenko/patterns-core/fit-text/style.css'
 import '@oleksiimazurenko/patterns-core/parallax/style.css'
 import '@oleksiimazurenko/patterns-core/reveal/style.css'
 import '@oleksiimazurenko/patterns-core/accordion/style.css'
+import '@oleksiimazurenko/patterns-core/scroll-progress/style.css'
+import '@oleksiimazurenko/patterns-core/sticky-shrink/style.css'
 import './globals.css'
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toast";
+import { ScrollProgress } from "@oleksiimazurenko/react-patterns/scroll-progress";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -24,21 +27,23 @@ const NAV = [
   ['reveal', '#reveal'],
   ['accordion', '#accordion'],
   ['analytics', '#analytics'],
+  ['sticky', '#sticky-shrink'],
 ] as const
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={cn("dark font-sans", geist.variable)}>
       <body className="min-h-screen bg-neutral-950 text-neutral-100 antialiased selection:bg-emerald-400/30">
+        <ScrollProgress className="text-emerald-400" height={3} />
         <header className="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/80 backdrop-blur">
-          <nav className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-3">
-            <a href="#top" className="text-sm font-semibold tracking-tight">
+          <nav className="mx-auto flex max-w-5xl items-center gap-4 px-4 py-3 sm:px-6">
+            <a href="#top" className="shrink-0 text-sm font-semibold tracking-tight">
               react-patterns
             </a>
-            <ul className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-neutral-400">
+            <ul className="flex min-w-0 flex-1 items-center gap-x-4 gap-y-1 overflow-x-auto text-xs text-neutral-400 [-ms-overflow-style:none] [scrollbar-width:none] sm:flex-wrap sm:justify-end [&::-webkit-scrollbar]:hidden">
               {NAV.map(([label, href]) => (
-                <li key={href}>
-                  <a className="transition hover:text-emerald-300" href={href}>
+                <li key={href} className="shrink-0">
+                  <a className="whitespace-nowrap transition hover:text-emerald-300" href={href}>
                     {label}
                   </a>
                 </li>

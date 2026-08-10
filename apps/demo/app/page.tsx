@@ -3,6 +3,7 @@ import { Parallax } from '@oleksiimazurenko/react-patterns/parallax'
 import { Reveal } from '@oleksiimazurenko/react-patterns/reveal'
 import { Accordion, AccordionItem } from '@oleksiimazurenko/react-patterns/accordion'
 import { trackProps } from '@oleksiimazurenko/react-patterns/analytics'
+import { StickyShrink } from '@oleksiimazurenko/react-patterns/sticky-shrink'
 
 import { ResizableFitText } from '@/components/ResizableFitText'
 import { ParallaxScene } from '@/components/ParallaxScene'
@@ -180,6 +181,50 @@ export default function Home() {
               {intent}
             </button>
           ))}
+        </div>
+      </section>
+
+      {/* scroll-progress (the bar is pinned at the very top of the page) */}
+      <section className="mx-auto max-w-5xl px-6 pt-8 pb-4">
+        <p className="font-mono text-xs uppercase tracking-widest text-emerald-400">recipe 06</p>
+        <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">scroll-progress</h2>
+        <p className="mt-4 max-w-2xl text-neutral-400">
+          The emerald bar pinned to the very top of this page is the
+          scroll-progress recipe — one fixed element whose <code className="text-emerald-300">scaleX</code> rides
+          the document&apos;s <code className="text-emerald-300">scroll()</code> timeline. Scroll and watch it fill; no listener.
+        </p>
+      </section>
+
+      {/* sticky-shrink */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <SectionHeading id="sticky-shrink" kicker="recipe 07" title="sticky-shrink" />
+        <p className="mb-8 max-w-2xl text-neutral-400">
+          Scroll <em>inside</em> the box — the header shrinks from 96 to 56px over
+          the first 180px, driven by one registered progress var. The logo reads
+          that same var and scales in step. Zero JS.
+        </p>
+        <div className="h-80 overflow-y-scroll rounded-2xl border border-white/10 bg-neutral-900/40">
+          <StickyShrink
+            from={96}
+            to={56}
+            distance={180}
+            className="z-10 flex items-center gap-3 border-b border-white/10 bg-neutral-900/95 px-6 backdrop-blur"
+          >
+            <div
+              className="rounded-lg bg-emerald-400"
+              style={{
+                width: '2rem',
+                height: '2rem',
+                scale: 'calc(1 - 0.25 * var(--sticky-shrink-progress))',
+              }}
+            />
+            <span className="font-semibold">Acme</span>
+          </StickyShrink>
+          <div className="space-y-4 p-6 text-sm text-neutral-400">
+            {Array.from({ length: 14 }, (_, i) => (
+              <p key={i}>Row {i + 1} — keep scrolling to shrink the header above.</p>
+            ))}
+          </div>
         </div>
       </section>
     </main>

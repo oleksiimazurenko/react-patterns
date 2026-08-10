@@ -1,0 +1,49 @@
+/**
+ * A sticky header that shrinks as you scroll — ZERO runtime JS. One registered
+ * progress custom property animates 0 → 1 over the first `--sticky-shrink-
+ * distance` px of scroll (driven by `scroll()`); the height is derived from it,
+ * and children inherit `--sticky-shrink-progress` so they can react too (e.g.
+ * scale a logo). Unlike the compositor-only parallax/reveal recipes this one
+ * DOES touch layout — bounded to the header + its subtree, only while scrolling
+ * the shrink distance. Under `prefers-reduced-motion` it stays at full height.
+ *
+ * `scroll()` uses the nearest scroll container, so this works both as a page
+ * header and inside a scrollable box.
+ *
+ * Technique from @ouvarov/scroll-parallax (MIT, Olexandr Uvarov); reimplemented.
+ */
+@property --sticky-shrink-progress {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@keyframes sticky-shrink {
+  from { --sticky-shrink-progress: 0; }
+  to   { --sticky-shrink-progress: 1; }
+}
+
+.sticky-shrink {
+  position: sticky;
+  top: 0;
+  height: calc(
+    var(--sticky-shrink-from, 80px) +
+    (var(--sticky-shrink-to, 56px) - var(--sticky-shrink-from, 80px)) *
+    var(--sticky-shrink-progress)
+  );
+}
+
+@supports (animation-timeline: scroll()) {
+  .sticky-shrink {
+    animation: sticky-shrink 1ms linear both;
+    animation-timeline: scroll();
+    animation-range: 0 var(--sticky-shrink-distance, 200px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-shrink {
+    animation: none;
+    --sticky-shrink-progress: 0;
+  }
+}

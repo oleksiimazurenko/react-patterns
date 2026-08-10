@@ -10,6 +10,8 @@ export default defineConfig({
     'src/reveal/index.ts',
     'src/accordion/index.ts',
     'src/analytics/index.ts',
+    'src/scroll-progress/index.ts',
+    'src/sticky-shrink/index.ts',
   ],
   format: ['esm', 'cjs'],
   // Declarations are emitted by tsc (tsconfig.build.json), not tsup's

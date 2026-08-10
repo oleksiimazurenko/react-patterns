@@ -15,6 +15,8 @@ as possible. Each recipe ships as its own subpath so you import only what you us
 | `@oleksiimazurenko/patterns-core/parallax/style.css` | Scroll parallax via `animation-timeline: view()` — no scroll listener, zero JS. |
 | `@oleksiimazurenko/patterns-core/reveal/style.css` | Fade-and-rise reveal on scroll via `view()` timeline — no IntersectionObserver, zero JS. |
 | `@oleksiimazurenko/patterns-core/accordion/style.css` | Native `<details>` accordion with smooth `interpolate-size` open/close — zero JS. |
+| `@oleksiimazurenko/patterns-core/scroll-progress/style.css` | Page progress bar via `scroll()` — one fixed element, zero JS. |
+| `@oleksiimazurenko/patterns-core/sticky-shrink/style.css` | Sticky header that shrinks on scroll via `scroll()` + a progress var — zero JS. |
 
 _More on the way: slider, …_
 

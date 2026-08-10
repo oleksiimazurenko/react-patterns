@@ -59,6 +59,16 @@
       "types": "./dist/analytics/index.d.ts",
       "import": "./dist/analytics/index.js",
       "require": "./dist/analytics/index.cjs"
+    },
+    "./scroll-progress": {
+      "types": "./dist/scroll-progress/index.d.ts",
+      "import": "./dist/scroll-progress/index.js",
+      "require": "./dist/scroll-progress/index.cjs"
+    },
+    "./sticky-shrink": {
+      "types": "./dist/sticky-shrink/index.d.ts",
+      "import": "./dist/sticky-shrink/index.js",
+      "require": "./dist/sticky-shrink/index.cjs"
     }
   },
   "sideEffects": [

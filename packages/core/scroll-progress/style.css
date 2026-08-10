@@ -1,0 +1,38 @@
+/**
+ * A page scroll-progress bar with ZERO runtime JS — a fixed element whose
+ * scaleX is driven by the document's own `scroll()` timeline. No scroll
+ * listener, no rAF. Because it mirrors the scrollbar (informational, not
+ * decorative), it stays active under `prefers-reduced-motion`. Browsers without
+ * scroll-driven animations simply don't show it — the bar rests at scaleX(0).
+ *
+ * Technique from @ouvarov/scroll-parallax (MIT, Olexandr Uvarov); reimplemented.
+ */
+@keyframes scroll-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.scroll-progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--scroll-progress-height, 3px);
+  background: var(--scroll-progress-color, currentColor);
+  transform: scaleX(0);
+  transform-origin: left center;
+  z-index: var(--scroll-progress-z, 2147483647);
+  pointer-events: none;
+}
+
+.scroll-progress[data-position="bottom"] {
+  top: auto;
+  bottom: 0;
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scroll-progress 1ms linear both;
+    animation-timeline: scroll(root block);
+  }
+}

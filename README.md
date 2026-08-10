@@ -26,6 +26,8 @@ works during SSR.
 | **reveal** | ✅ ready | Fade-and-rise into view on scroll — `view()` timeline, no IntersectionObserver, no JS. |
 | **accordion** | ✅ ready | Native `<details>` + `interpolate-size` smooth open/close; exclusive via `name` — no state, no JS. |
 | **slider** | 🚧 planned | Carousel with CSS scroll-snap — no library. |
+| **scroll-progress** | ✅ ready | Page progress bar driven by `scroll()` — one fixed element, no listener. |
+| **sticky-shrink** | ✅ ready | Sticky header that shrinks on scroll (`scroll()` + a registered progress var). |
 | **analytics** | ✅ ready | One delegated `document` listener + `data-*` contracts — components stay server HTML. |
 
 ## Demo
@@ -67,9 +69,10 @@ the published packages).
 
 ## Credits
 
-The **parallax** recipe uses the CSS `animation-timeline: view()` technique
+The **parallax**, **scroll-progress** and **sticky-shrink** recipes build on the
+CSS scroll-driven animation techniques (`animation-timeline: view()` / `scroll()`)
 popularized by [`@ouvarov/scroll-parallax`](https://www.npmjs.com/package/@ouvarov/scroll-parallax)
-(MIT, by Oleksandr Uvarov). The implementation here is written from scratch; if
+(MIT, by Oleksandr Uvarov). The implementations here are written from scratch; if
 you need a full-featured, battle-tested version, use that package directly.
 
 ## License

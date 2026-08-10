@@ -21,6 +21,8 @@ npm install @oleksiimazurenko/react-patterns @oleksiimazurenko/patterns-core
 | `@oleksiimazurenko/react-patterns/reveal` | `<Reveal>` — fade-and-rise into view on scroll, zero JS. |
 | `@oleksiimazurenko/react-patterns/accordion` | `<Accordion>` / `<AccordionItem>` — native `<details>`, smooth, exclusive, zero JS. |
 | `@oleksiimazurenko/react-patterns/analytics` | `registerAnalytics` + `trackProps` — one delegated listener, tracked components stay server HTML. |
+| `@oleksiimazurenko/react-patterns/scroll-progress` | `<ScrollProgress>` — page progress bar, zero JS. |
+| `@oleksiimazurenko/react-patterns/sticky-shrink` | `<StickyShrink>` — sticky header that shrinks on scroll, zero JS. |
 
 _More on the way: slider, …_
 
@@ -190,6 +192,49 @@ via `closest('[data-track]')`) and, unless `toggle: false`, a capture-phase
 `toggle` listener so a `<details data-track>` fires when it opens. It returns a
 cleanup function. `send(event, data, el)` receives the `data-track` value and the
 `data-track-*` payload (`data-track-place` → `data.place`).
+
+## scroll-progress
+
+```tsx
+import { ScrollProgress } from '@oleksiimazurenko/react-patterns/scroll-progress'
+import '@oleksiimazurenko/patterns-core/scroll-progress/style.css'
+
+// Put it once near the root of your app.
+<ScrollProgress className="text-emerald-400" height={3} />
+```
+
+| Prop | Default | Description |
+| ---- | ------- | ----------- |
+| `position` | `"top"` | Which edge to pin the bar to (`"top"` / `"bottom"`). |
+| `height` | `3` | Bar thickness (number → px). |
+| `color` | `currentColor` | Bar color (or set a text color on it, as above). |
+
+One fixed `<div>`, no `'use client'`. Mirrors the scrollbar, so it stays active
+under `prefers-reduced-motion`; unsupported browsers just don't show it.
+
+## sticky-shrink
+
+```tsx
+import { StickyShrink } from '@oleksiimazurenko/react-patterns/sticky-shrink'
+import '@oleksiimazurenko/patterns-core/sticky-shrink/style.css'
+
+<StickyShrink from={96} to={56} distance={180}>
+  <Logo style={{ scale: 'calc(1 - 0.25 * var(--sticky-shrink-progress))' }} />
+  <nav>…</nav>
+</StickyShrink>
+```
+
+| Prop | Default | Description |
+| ---- | ------- | ----------- |
+| `from` | `80` | Full (tall) height in px. |
+| `to` | `56` | Shrunk height in px. |
+| `distance` | `200` | Scroll distance (px) over which it shrinks. |
+| `as` | `"header"` | Element/tag to render. |
+
+Renders server HTML (no `'use client'`). Children inherit `--sticky-shrink-progress`
+(0 → 1) so they can react in step. Uses the nearest scroll container, so it works
+as a page header or inside a scrollable box. Stays full height under
+`prefers-reduced-motion`.
 
 ## License
 
