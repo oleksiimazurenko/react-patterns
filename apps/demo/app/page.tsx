@@ -79,22 +79,9 @@ export default function Home() {
       <section className="mx-auto max-w-5xl px-6 py-20">
         <SectionHeading id="fit-text" kicker="recipe 01" title="fit-text" />
         <p className="mb-8 max-w-2xl text-neutral-400">
-          The same component in three different containers — the font scales to
-          each one with container-query units, no measuring, no layout shift.
-        </p>
-        <div className="grid gap-6 sm:grid-cols-3">
-          {['w-full', 'w-full', 'w-full'].map((_, i) => (
-            <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-5">
-              <FitText className="font-semibold" min="1.25rem" max={40}>
-                Learn anything
-              </FitText>
-            </div>
-          ))}
-        </div>
-
-        <p className="mt-10 mb-3 text-sm text-neutral-500">
-          …or drag the handle — the font rescales live with its container
-          (shadcn <code className="text-emerald-300">Resizable</code>):
+          The font scales to its container with container-query units — no
+          measuring, no layout shift. Drag the handle and watch it rescale live
+          (shadcn <code className="text-emerald-300">Resizable</code>).
         </p>
         <ResizableFitText />
       </section>
