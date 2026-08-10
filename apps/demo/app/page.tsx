@@ -116,10 +116,17 @@ export default function Home() {
           {SCENES.map((s, i) => (
             <article
               key={s.title}
-              className="relative h-72 overflow-hidden rounded-2xl border border-white/10"
+              className={`relative h-72 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${s.grad}`}
             >
-              <Parallax amplitude={i % 2 === 0 ? 50 : 70} className="absolute inset-x-0 -inset-y-16">
-                <div className={`h-full w-full bg-gradient-to-br ${s.grad}`} />
+              <Parallax amplitude={i % 2 === 0 ? 56 : 76} className="absolute inset-x-0 -inset-y-24">
+                <div
+                  className="h-full w-full"
+                  style={{
+                    backgroundImage:
+                      'radial-gradient(rgba(255,255,255,0.22) 1.5px, transparent 1.6px)',
+                    backgroundSize: '22px 22px',
+                  }}
+                />
               </Parallax>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
               <div className="absolute inset-x-5 bottom-5">
