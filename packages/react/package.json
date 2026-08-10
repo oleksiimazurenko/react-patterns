@@ -54,6 +54,11 @@
       "types": "./dist/accordion/index.d.ts",
       "import": "./dist/accordion/index.js",
       "require": "./dist/accordion/index.cjs"
+    },
+    "./analytics": {
+      "types": "./dist/analytics/index.d.ts",
+      "import": "./dist/analytics/index.js",
+      "require": "./dist/analytics/index.cjs"
     }
   },
   "sideEffects": [

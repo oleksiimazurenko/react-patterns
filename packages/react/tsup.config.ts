@@ -9,6 +9,7 @@ export default defineConfig({
     'src/parallax/index.ts',
     'src/reveal/index.ts',
     'src/accordion/index.ts',
+    'src/analytics/index.ts',
   ],
   format: ['esm', 'cjs'],
   // Declarations are emitted by tsc (tsconfig.build.json), not tsup's

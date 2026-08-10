@@ -26,7 +26,7 @@ works during SSR.
 | **reveal** | ✅ ready | Fade-and-rise into view on scroll — `view()` timeline, no IntersectionObserver, no JS. |
 | **accordion** | ✅ ready | Native `<details>` + `interpolate-size` smooth open/close; exclusive via `name` — no state, no JS. |
 | **slider** | 🚧 planned | Carousel with CSS scroll-snap — no library. |
-| **analytics** | 🚧 planned | One delegated `document` listener + `data-*` contracts — components stay server HTML. |
+| **analytics** | ✅ ready | One delegated `document` listener + `data-*` contracts — components stay server HTML. |
 
 ## Develop
 

@@ -20,8 +20,9 @@ npm install @oleksiimazurenko/react-patterns @oleksiimazurenko/patterns-core
 | `@oleksiimazurenko/react-patterns/parallax` | `<Parallax>` — scroll parallax with zero JS (`animation-timeline: view()`). |
 | `@oleksiimazurenko/react-patterns/reveal` | `<Reveal>` — fade-and-rise into view on scroll, zero JS. |
 | `@oleksiimazurenko/react-patterns/accordion` | `<Accordion>` / `<AccordionItem>` — native `<details>`, smooth, exclusive, zero JS. |
+| `@oleksiimazurenko/react-patterns/analytics` | `registerAnalytics` + `trackProps` — one delegated listener, tracked components stay server HTML. |
 
-_More on the way: slider, analytics (one delegated listener), …_
+_More on the way: slider, …_
 
 ## fit-text
 
@@ -136,6 +137,52 @@ import '@oleksiimazurenko/patterns-core/accordion/style.css'
 Open/close, exclusivity and the smooth `interpolate-size` animation are all
 native/CSS — zero `'use client'`. Browsers without `interpolate-size` /
 `::details-content` just open instantly.
+
+## analytics
+
+The moment you add click tracking to a component it usually becomes a client
+component and ships JS. Instead: mark elements declaratively with `data-track`,
+and handle every event with **one** delegated listener. Tracked components stay
+pure server HTML — zero `'use client'`.
+
+Full write-up: [One listener instead of client components](https://oleksiimazurenko.dev/en/blog/one-listener-instead-of-client-components).
+
+**1. Mark elements (Server Components, no `'use client'`):**
+
+```tsx
+import { trackProps } from '@oleksiimazurenko/react-patterns/analytics'
+
+<a href={href} {...trackProps('cta_clicked', { place: 'hero', label })}>
+  {label}
+</a>
+// → data-track="cta_clicked" data-track-place="hero" data-track-label="…"
+```
+
+**2. Register the single listener once, at app startup.** Lazy-load your SDK
+inside `send` so it stays off the critical path:
+
+```ts
+import { registerAnalytics } from '@oleksiimazurenko/react-patterns/analytics'
+
+registerAnalytics(async (event, data) => {
+  const { track } = await import('@/lib/analytics') // pulled on first interaction
+  track(event, data)
+})
+```
+
+Where to put that one call:
+
+| Runtime | File |
+| ------- | ---- |
+| **Next.js** | `instrumentation-client.ts` — runs once on the client before app code; no component, no `useEffect` |
+| Vite / SPA | `main.ts` |
+| Plain HTML | a `<script>` |
+
+`registerAnalytics(send, options?)` attaches a single `click` listener (delegated
+via `closest('[data-track]')`) and, unless `toggle: false`, a capture-phase
+`toggle` listener so a `<details data-track>` fires when it opens. It returns a
+cleanup function. `send(event, data, el)` receives the `data-track` value and the
+`data-track-*` payload (`data-track-place` → `data.place`).
 
 ## License
 
