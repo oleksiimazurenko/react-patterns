@@ -253,12 +253,19 @@ import '@oleksiimazurenko/patterns-core/slider/style.css'
 | `itemSize` | `85%` | Flex-basis of each slide (e.g. `"70%"`, `"20rem"`). |
 | `gap` | `1rem` | Gap between slides. |
 | `dotColor` | `currentColor` | Color of the pagination dots. |
-| `snapStop` | `"always"` | `"always"` advances one slide per click/swipe (even when several show); `"normal"` lets a fling pass multiple. |
+| `snapStop` | `"always"` | `"always"` makes a swipe advance one slide at a time; `"normal"` lets a fling pass multiple. |
+| `snapAlign` | `"start"` | Where slides snap: `"start"` (multi-slide rows), `"center"` (single slide + peek), `"end"`. |
 | `as` | `"ul"` | Element/tag for the track. |
 
-Slides-per-view is just `itemSize` (the `--slider-item` var): a fraction like
-`"33.333%"` shows 3, a fixed width like `"18rem"` shows as many as fit, or set it
-responsively per breakpoint (`[--slider-item:82%] sm:[--slider-item:46%] lg:[--slider-item:31%]`).
+**Slides-per-view** is just `itemSize` (`--slider-item`): a fraction like `"33.333%"`
+shows 3, a fixed width like `"18rem"` shows as many as fit, or set it responsively
+per breakpoint (`[--slider-item:84%] sm:[--slider-item:46%]`).
+
+**Arrow step:** a `::scroll-button` scrolls by a page (that distance is
+browser-controlled, not settable in CSS). So the arrows advance **one slide when
+one is shown** (single-slide carousel with a peek) and **page the group when
+several are shown** — the platform's scroll-button behavior. Swipe and dots are
+always one-at-a-time.
 
 The track is CSS scroll-snap — swipe/trackpad works everywhere, no `'use client'`.
 The pagination dots (with an active state) and the prev/next buttons are the CSS

@@ -243,15 +243,18 @@ export default function Home() {
         <p className="mb-8 max-w-2xl text-neutral-400">
           A CSS scroll-snap track — swipe or trackpad works everywhere. Dots and
           prev/next buttons are CSS Carousel pseudo-elements, so they need no JS.
-          Resize the window: it shows <strong>1 slide on phones, 2 on tablets, 3
-          on desktop</strong> — just a responsive <code className="text-emerald-300">--slider-item</code> variable,
-          no JS. (Controls want Chrome 135+; elsewhere the track still snaps.)
+          One slide at a time with a peek of the next; the arrow advances exactly
+          one. (For a multi-slide row, use a smaller <code className="text-emerald-300">itemSize</code> —
+          the arrows then page the group, which is how scroll-buttons work.
+          Controls want Chrome 135+.)
         </p>
         <div className="relative">
           <Slider
+            itemSize="84%"
+            snapAlign="center"
             gap="1rem"
             dotColor="#6ee7b7"
-            className="px-8 scroll-px-8 [--slider-item:82%] sm:[--slider-item:46%] lg:[--slider-item:31%]"
+            className="px-8 scroll-px-8"
           >
             {SLIDES.map((s) => (
               <li

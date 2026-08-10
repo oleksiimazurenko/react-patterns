@@ -27,10 +27,11 @@
 
 .slider > * {
   flex: 0 0 var(--slider-item, 85%);
-  scroll-snap-align: center;
-  /* Force a stop at every slide, so a button click / swipe advances ONE slide
-     at a time even when several are visible (set to `normal` to allow flinging
-     past multiple). */
+  /* `start` keeps the step predictable at one slide when several are visible;
+     use `center` for a single-item, peek-both-sides carousel. */
+  scroll-snap-align: var(--slider-snap-align, start);
+  /* Force a stop at every slide, so a swipe advances ONE slide at a time even
+     when several are visible (set to `normal` to allow flinging past multiple). */
   scroll-snap-stop: var(--slider-snap-stop, always);
 }
 
