@@ -19,8 +19,9 @@ npm install @oleksiimazurenko/react-patterns @oleksiimazurenko/patterns-core
 | `@oleksiimazurenko/react-patterns/fit-text` | `<FitText>` — text that scales to its container with zero JS. |
 | `@oleksiimazurenko/react-patterns/parallax` | `<Parallax>` — scroll parallax with zero JS (`animation-timeline: view()`). |
 | `@oleksiimazurenko/react-patterns/reveal` | `<Reveal>` — fade-and-rise into view on scroll, zero JS. |
+| `@oleksiimazurenko/react-patterns/accordion` | `<Accordion>` / `<AccordionItem>` — native `<details>`, smooth, exclusive, zero JS. |
 
-_More on the way: accordion, slider, analytics (one delegated listener), …_
+_More on the way: slider, analytics (one delegated listener), …_
 
 ## fit-text
 
@@ -109,6 +110,32 @@ import '@oleksiimazurenko/patterns-core/reveal/style.css'
 Renders plain server HTML (no `'use client'`). The hidden state lives only in
 the keyframes, so unsupported browsers and `prefers-reduced-motion` show the
 content fully visible in place — it never stays hidden.
+
+## accordion
+
+```tsx
+import { Accordion, AccordionItem } from '@oleksiimazurenko/react-patterns/accordion'
+import '@oleksiimazurenko/patterns-core/accordion/style.css'
+
+// `name` makes it exclusive (only one open at a time) — native, no JS.
+<Accordion name="faq">
+  <AccordionItem title="What is this?">A pure-CSS accordion.</AccordionItem>
+  <AccordionItem title="Does it ship JS?" defaultOpen>No — native <details>.</AccordionItem>
+</Accordion>
+
+// Omit `name` to allow multiple open at once.
+<Accordion>
+  <AccordionItem title="One">…</AccordionItem>
+  <AccordionItem title="Two">…</AccordionItem>
+</Accordion>
+```
+
+**`<Accordion>`** — `name?` (exclusive group), `as`, `className`, `style`.
+**`<AccordionItem>`** — `title` (header), `defaultOpen?`, `name?` (usually injected by the parent), `className`.
+
+Open/close, exclusivity and the smooth `interpolate-size` animation are all
+native/CSS — zero `'use client'`. Browsers without `interpolate-size` /
+`::details-content` just open instantly.
 
 ## License
 

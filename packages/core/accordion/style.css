@@ -1,0 +1,73 @@
+/**
+ * Accordion with ZERO runtime JS — built on native <details>/<summary>.
+ *
+ * Open/close is the browser's own behavior (no state, no handlers). Passing the
+ * same `name` to a group of <details> makes them mutually exclusive (only one
+ * open at a time) — again, native, no JS.
+ *
+ * The smooth open/close is pure CSS: `interpolate-size: allow-keywords` unlocks
+ * the `block-size: 0 → auto` transition on the `::details-content` pseudo.
+ * Browsers without it just open/close instantly — nothing breaks.
+ */
+.accordion,
+.accordion-item {
+  interpolate-size: allow-keywords;
+}
+
+.accordion-item::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size var(--accordion-duration, 300ms) ease,
+    content-visibility var(--accordion-duration, 300ms) allow-discrete;
+}
+
+.accordion-item[open]::details-content {
+  block-size: auto;
+}
+
+.accordion-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  list-style: none;
+}
+
+/* Hide the default disclosure triangle (WebKit + the standard marker). */
+.accordion-summary::-webkit-details-marker {
+  display: none;
+}
+.accordion-summary::marker {
+  content: "";
+}
+
+/* CSS-only chevron — a rotated border corner, no icon dependency. */
+.accordion-summary::after {
+  content: "";
+  flex-shrink: 0;
+  width: 0.5em;
+  height: 0.5em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  rotate: 45deg;
+  transition: rotate 300ms ease;
+}
+
+.accordion-item[open] > .accordion-summary::after {
+  rotate: -135deg;
+}
+
+.accordion-content {
+  padding-top: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-item::details-content {
+    transition: none;
+  }
+  .accordion-summary::after {
+    transition: none;
+  }
+}

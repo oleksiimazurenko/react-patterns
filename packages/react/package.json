@@ -49,6 +49,11 @@
       "types": "./dist/reveal/index.d.ts",
       "import": "./dist/reveal/index.js",
       "require": "./dist/reveal/index.cjs"
+    },
+    "./accordion": {
+      "types": "./dist/accordion/index.d.ts",
+      "import": "./dist/accordion/index.js",
+      "require": "./dist/accordion/index.cjs"
     }
   },
   "sideEffects": [

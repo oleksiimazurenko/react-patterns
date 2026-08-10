@@ -24,7 +24,7 @@ works during SSR.
 | **fit-text** | ✅ ready | Text scales to its container — container-query `cqi` + `clamp()`, zero JS. |
 | **parallax** | ✅ ready | Scroll parallax with `animation-timeline: view()` — no scroll listener, no JS. |
 | **reveal** | ✅ ready | Fade-and-rise into view on scroll — `view()` timeline, no IntersectionObserver, no JS. |
-| **accordion** | 🚧 planned | Open/close via `<details>` / `:has()` — no state, no JS. |
+| **accordion** | ✅ ready | Native `<details>` + `interpolate-size` smooth open/close; exclusive via `name` — no state, no JS. |
 | **slider** | 🚧 planned | Carousel with CSS scroll-snap — no library. |
 | **analytics** | 🚧 planned | One delegated `document` listener + `data-*` contracts — components stay server HTML. |
 

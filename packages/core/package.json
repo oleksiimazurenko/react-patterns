@@ -27,7 +27,8 @@
   "exports": {
     "./fit-text/style.css": "./fit-text/style.css",
     "./parallax/style.css": "./parallax/style.css",
-    "./reveal/style.css": "./reveal/style.css"
+    "./reveal/style.css": "./reveal/style.css",
+    "./accordion/style.css": "./accordion/style.css"
   },
   "sideEffects": [
     "*.css"
@@ -36,6 +37,7 @@
     "fit-text",
     "parallax",
     "reveal",
+    "accordion",
     "README.md"
   ],
   "publishConfig": {

@@ -3,3 +3,5 @@
 export { FitText, type FitTextProps } from './fit-text'
 export { Parallax, type ParallaxProps } from './parallax'
 export { Reveal, type RevealProps } from './reveal'
+export { Accordion, type AccordionProps } from './accordion'
+export { AccordionItem, type AccordionItemProps } from './accordion'
