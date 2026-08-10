@@ -33,6 +33,9 @@
   gap: 16px;
   cursor: pointer;
   list-style: none;
+  /* Rapid clicks toggle the row; don't let them select the header text. */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* Hide the default disclosure triangle (WebKit + the standard marker). */
