@@ -33,6 +33,21 @@ const FAQ = [
   ['Can I use one recipe only?', 'Yes — each is its own subpath import, so you ship only what you use.'],
 ]
 
+const SCENES = [
+  { kicker: 'depth', title: 'Layered scroll', grad: 'from-emerald-400/50 via-teal-600/40 to-sky-800/60' },
+  { kicker: 'motion', title: 'On the compositor', grad: 'from-sky-400/50 via-indigo-600/40 to-violet-900/60' },
+  { kicker: 'zero js', title: 'No scroll listener', grad: 'from-amber-300/40 via-rose-500/40 to-fuchsia-900/60' },
+]
+
+const THUMBS = [
+  'from-emerald-400/40 to-teal-700/40',
+  'from-sky-400/40 to-indigo-700/40',
+  'from-violet-400/40 to-fuchsia-700/40',
+  'from-amber-300/40 to-rose-600/40',
+  'from-teal-400/40 to-emerald-700/40',
+  'from-indigo-400/40 to-sky-700/40',
+]
+
 // Cache Components in action: this async server component is cached (`use cache`)
 // and prerendered into the static shell — it never re-runs per request.
 async function BuiltWith() {
@@ -90,32 +105,43 @@ export default function Home() {
       <section className="mx-auto max-w-5xl px-6 py-20">
         <SectionHeading id="parallax" kicker="recipe 02" title="parallax" />
         <p className="mb-8 max-w-2xl text-neutral-400">
-          Scroll-driven drift on the compositor (<code className="text-emerald-300">animation-timeline: view()</code>) —
-          no scroll listener. Scroll the page and watch the tiles.
+          Each frame holds a layer that drifts at its own rate as you scroll —
+          depth rendered on the compositor (<code className="text-emerald-300">animation-timeline: view()</code>),
+          no scroll listener.
         </p>
+
+        {/* Framed scenes: the gradient layer is taller than its frame and drifts
+            inside it, so you see depth rather than a whole tile sliding. */}
         <div className="grid gap-6 sm:grid-cols-3">
-          {[10, 40, 70].map((amp) => (
-            <Parallax
-              key={amp}
-              amplitude={amp}
-              className="flex h-40 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-emerald-500/20 to-sky-500/20 text-lg font-medium"
+          {SCENES.map((s, i) => (
+            <article
+              key={s.title}
+              className="relative h-72 overflow-hidden rounded-2xl border border-white/10"
             >
-              amplitude {amp}
-            </Parallax>
+              <Parallax amplitude={i % 2 === 0 ? 50 : 70} className="absolute inset-x-0 -inset-y-16">
+                <div className={`h-full w-full bg-gradient-to-br ${s.grad}`} />
+              </Parallax>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+              <div className="absolute inset-x-5 bottom-5">
+                <p className="font-mono text-[11px] uppercase tracking-widest text-white/60">
+                  {s.kicker}
+                </p>
+                <p className="text-xl font-semibold">{s.title}</p>
+              </div>
+            </article>
           ))}
         </div>
-        <div className="mt-6">
-          <Parallax stagger={10} amplitude={28} className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {Array.from({ length: 8 }, (_, i) => (
-              <div
-                key={i}
-                className="flex h-24 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-sm text-neutral-300"
-              >
-                stagger {i + 1}
-              </div>
-            ))}
-          </Parallax>
-        </div>
+
+        {/* stagger: children ride their own timelines, entrances cascading */}
+        <p className="mt-12 mb-4 text-sm text-neutral-500">
+          <code className="text-emerald-300">stagger</code> — the same recipe over
+          a group; each child&apos;s entrance is offset from the last.
+        </p>
+        <Parallax stagger={8} amplitude={24} className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+          {THUMBS.map((grad) => (
+            <div key={grad} className={`h-20 rounded-xl bg-gradient-to-br ${grad}`} />
+          ))}
+        </Parallax>
       </section>
 
       {/* reveal */}
