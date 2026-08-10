@@ -39,7 +39,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ScrollProgress className="text-emerald-400" height={3} />
         <header className="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/80 backdrop-blur">
           <nav className="mx-auto flex max-w-5xl items-center gap-4 px-4 py-3 sm:px-6">
-            <a href="#top" className="shrink-0 text-sm font-semibold tracking-tight">
+            <a href="#top" className="flex shrink-0 items-center gap-2 text-sm font-semibold tracking-tight">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden className="h-5 w-5">
+                <ellipse cx="24" cy="24" rx="18.5" ry="7.5" transform="rotate(-24 24 24)" stroke="#34d399" strokeWidth="3" />
+                <circle cx="24" cy="24" r="4.5" fill="#6ee7b7" />
+              </svg>
               react-patterns
             </a>
             <ul className="flex min-w-0 flex-1 items-center gap-x-4 gap-y-1 overflow-x-auto px-5 text-xs text-neutral-400 [-ms-overflow-style:none] [mask-image:linear-gradient(to_right,transparent,black_1.25rem,black_calc(100%_-_1.25rem),transparent)] [scrollbar-width:none] sm:flex-wrap sm:justify-end sm:px-0 sm:[mask-image:none] [&::-webkit-scrollbar]:hidden">

@@ -1,3 +1,5 @@
+<img src="logo.svg" alt="react-patterns" width="60" height="60" />
+
 # react-patterns
 
 A growing collection of **React best practices** — each recipe done with as
