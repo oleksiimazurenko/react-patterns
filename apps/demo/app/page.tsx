@@ -4,6 +4,8 @@ import { Reveal } from '@oleksiimazurenko/react-patterns/reveal'
 import { Accordion, AccordionItem } from '@oleksiimazurenko/react-patterns/accordion'
 import { trackProps } from '@oleksiimazurenko/react-patterns/analytics'
 
+import { ResizableFitText } from '@/components/ResizableFitText'
+
 function SectionHeading({ id, kicker, title }: { id: string; kicker: string; title: string }) {
   return (
     <div className="mb-10">
@@ -89,6 +91,12 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        <p className="mt-10 mb-3 text-sm text-neutral-500">
+          …or drag the handle — the font rescales live with its container
+          (shadcn <code className="text-emerald-300">Resizable</code>):
+        </p>
+        <ResizableFitText />
       </section>
 
       {/* parallax */}
@@ -171,7 +179,7 @@ export default function Home() {
         <p className="mb-8 max-w-2xl text-neutral-400">
           These buttons are plain server HTML with <code className="text-emerald-300">data-track</code> attributes.
           One delegated listener (in <code className="text-emerald-300">instrumentation-client.ts</code>) catches
-          every click — watch the panel in the bottom-right.
+          every click — a toast pops up for each event.
         </p>
         <div className="flex flex-wrap gap-3">
           {['sign_up', 'buy', 'contact', 'share'].map((intent) => (

@@ -6,6 +6,11 @@ import '@oleksiimazurenko/patterns-core/parallax/style.css'
 import '@oleksiimazurenko/patterns-core/reveal/style.css'
 import '@oleksiimazurenko/patterns-core/accordion/style.css'
 import './globals.css'
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toast";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: 'react-patterns — zero-JS React recipes',
@@ -23,7 +28,7 @@ const NAV = [
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("dark font-sans", geist.variable)}>
       <body className="min-h-screen bg-neutral-950 text-neutral-100 antialiased selection:bg-emerald-400/30">
         <header className="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/80 backdrop-blur">
           <nav className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-3">
@@ -55,20 +60,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </a>
         </footer>
 
-        {/* Populated live by instrumentation-client.ts (the analytics recipe). */}
-        <aside
-          className="fixed bottom-4 right-4 z-50 max-h-56 w-72 overflow-auto rounded-lg border border-white/10 bg-neutral-900/95 p-3 shadow-xl backdrop-blur"
-          aria-live="polite"
-        >
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
-            analytics log (delegated)
-          </p>
-          <div id="analytics-log" className="flex flex-col gap-1">
-            <span className="text-xs text-neutral-500">
-              Click a tracked element…
-            </span>
-          </div>
-        </aside>
+        {/* Analytics events (from instrumentation-client.ts) pop up here. */}
+        <Toaster />
       </body>
     </html>
   )
