@@ -1,6 +1,6 @@
 {
   "name": "@oleksiimazurenko/react-patterns",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A growing collection of React best practices — each recipe done with as little client JS as possible. Import the whole set or a single recipe (fit-text, parallax, accordion, slider, …).",
   "keywords": [
     "react",
@@ -21,7 +21,7 @@
     "url": "git+https://github.com/oleksiimazurenko/react-patterns.git",
     "directory": "packages/react"
   },
-  "homepage": "https://github.com/oleksiimazurenko/react-patterns/tree/main/packages/react#readme",
+  "homepage": "https://react-patterns-demo-flax.vercel.app",
   "bugs": {
     "url": "https://github.com/oleksiimazurenko/react-patterns/issues"
   },

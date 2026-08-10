@@ -4,6 +4,8 @@ A growing collection of **React best practices** — each recipe done with as
 little client JavaScript as possible (pure CSS, server-first). Import the whole
 set, or a single recipe by subpath so you ship only what you use.
 
+**[▶ Live demo](https://react-patterns-demo-flax.vercel.app/)** · [GitHub](https://github.com/oleksiimazurenko/react-patterns)
+
 ## Install
 
 ```sh

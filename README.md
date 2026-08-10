@@ -2,6 +2,8 @@
 
 # react-patterns
 
+**[▶ Live demo](https://react-patterns-demo-flax.vercel.app/)** · [npm](https://www.npmjs.com/package/@oleksiimazurenko/react-patterns)
+
 A growing collection of **React best practices** — each recipe done with as
 little client JavaScript as possible: pure CSS where a stylesheet is enough,
 server-first where markup is enough, and a single delegated listener where the

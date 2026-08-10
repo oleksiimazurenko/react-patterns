@@ -7,6 +7,8 @@ as possible. Each recipe ships as its own subpath so you import only what you us
 > Using React? Prefer [`@oleksiimazurenko/react-patterns`](https://www.npmjs.com/package/@oleksiimazurenko/react-patterns),
 > which wraps these stylesheets in ready-made components.
 
+**[▶ Live demo](https://react-patterns-demo-flax.vercel.app/)** · [GitHub](https://github.com/oleksiimazurenko/react-patterns)
+
 ## Recipes
 
 | Import | What it does |
