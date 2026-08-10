@@ -83,6 +83,13 @@ Renders plain server HTML (no `'use client'`). Unsupported browsers (Safari < 26
 Firefox without the flag) and `prefers-reduced-motion` show the element at rest —
 no jump, no cleanup rule needed (the animation is gated behind `@supports`).
 
+> **Gotcha — clipping.** Don't wrap a parallax element in an `overflow: hidden`
+> ancestor: `hidden` establishes a *scroll container*, so `view()` measures
+> progress against that box (which doesn't scroll) instead of the page, and the
+> element never moves. Use **`overflow: clip`** to crop the layer — it clips the
+> same way but does not create a scroll container, so the timeline stays tied to
+> page scroll.
+
 ## reveal
 
 ```tsx

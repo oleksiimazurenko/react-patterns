@@ -5,6 +5,7 @@ import { Accordion, AccordionItem } from '@oleksiimazurenko/react-patterns/accor
 import { trackProps } from '@oleksiimazurenko/react-patterns/analytics'
 
 import { ResizableFitText } from '@/components/ResizableFitText'
+import { ParallaxScene } from '@/components/ParallaxScene'
 
 function SectionHeading({ id, kicker, title }: { id: string; kicker: string; title: string }) {
   return (
@@ -31,12 +32,6 @@ const FAQ = [
   ['Do the components need "use client"?', 'No. They only render markup and set CSS variables / data attributes, so they work as Server Components.'],
   ['What about old browsers?', 'Every recipe is gated behind @supports or native fallbacks — unsupported engines render the content at rest, never broken.'],
   ['Can I use one recipe only?', 'Yes — each is its own subpath import, so you ship only what you use.'],
-]
-
-const SCENES = [
-  { kicker: 'depth', title: 'Layered scroll', grad: 'from-emerald-400/50 via-teal-600/40 to-sky-800/60' },
-  { kicker: 'motion', title: 'On the compositor', grad: 'from-sky-400/50 via-indigo-600/40 to-violet-900/60' },
-  { kicker: 'zero js', title: 'No scroll listener', grad: 'from-amber-300/40 via-rose-500/40 to-fuchsia-900/60' },
 ]
 
 const THUMBS = [
@@ -110,34 +105,7 @@ export default function Home() {
           no scroll listener.
         </p>
 
-        {/* Framed scenes: the gradient layer is taller than its frame and drifts
-            inside it, so you see depth rather than a whole tile sliding. */}
-        <div className="grid gap-6 sm:grid-cols-3">
-          {SCENES.map((s, i) => (
-            <article
-              key={s.title}
-              className={`relative h-72 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br ${s.grad}`}
-            >
-              <Parallax amplitude={i % 2 === 0 ? 56 : 76} className="absolute inset-x-0 -inset-y-24">
-                <div
-                  className="h-full w-full"
-                  style={{
-                    backgroundImage:
-                      'radial-gradient(rgba(255,255,255,0.22) 1.5px, transparent 1.6px)',
-                    backgroundSize: '22px 22px',
-                  }}
-                />
-              </Parallax>
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute inset-x-5 bottom-5">
-                <p className="font-mono text-[11px] uppercase tracking-widest text-white/60">
-                  {s.kicker}
-                </p>
-                <p className="text-xl font-semibold">{s.title}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <ParallaxScene />
 
         {/* stagger: children ride their own timelines, entrances cascading */}
         <p className="mt-12 mb-4 text-sm text-neutral-500">
