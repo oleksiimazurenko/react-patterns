@@ -17,7 +17,7 @@ as possible. Each recipe ships as its own subpath so you import only what you us
 | `@oleksiimazurenko/patterns-core/accordion/style.css` | Native `<details>` accordion with smooth `interpolate-size` open/close — zero JS. |
 | `@oleksiimazurenko/patterns-core/scroll-progress/style.css` | Page progress bar via `scroll()` — one fixed element, zero JS. |
 | `@oleksiimazurenko/patterns-core/sticky-shrink/style.css` | Sticky header that shrinks on scroll via `scroll()` + a progress var — zero JS. |
-| `@oleksiimazurenko/patterns-core/slider/style.css` | Carousel — scroll-snap track + CSS Carousel dots/buttons — zero JS. |
+| `@oleksiimazurenko/patterns-core/slider/style.css` | Carousel — scroll-snap track + CSS Carousel dots & prev/next buttons — zero JS. |
 
 ## fit-text
 

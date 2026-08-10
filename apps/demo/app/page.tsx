@@ -246,16 +246,32 @@ export default function Home() {
           pseudo-elements, so they need no JS. Arrows and dots want Chrome 135+;
           elsewhere the track still snaps.
         </p>
-        <Slider itemSize="70%" gap="1rem" className="text-emerald-400">
-          {SLIDES.map((s) => (
-            <li
-              key={s.title}
-              className={`grid h-56 place-items-center rounded-2xl bg-gradient-to-br ${s.grad}`}
-            >
-              <span className="text-2xl font-semibold text-white">{s.title}</span>
-            </li>
-          ))}
-        </Slider>
+        <div className="relative">
+          <Slider
+            itemSize="70%"
+            gap="1rem"
+            dotColor="#6ee7b7"
+            className="px-8 scroll-px-8"
+          >
+            {SLIDES.map((s) => (
+              <li
+                key={s.title}
+                className={`grid h-56 place-items-center rounded-2xl bg-gradient-to-br ${s.grad}`}
+              >
+                <span className="text-2xl font-semibold text-white">{s.title}</span>
+              </li>
+            ))}
+          </Slider>
+          {/* edge orientation — sits under the arrows (which are fixed, z-2) */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-8 bg-gradient-to-r from-neutral-950 to-transparent"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-8 bg-gradient-to-l from-neutral-950 to-transparent"
+          />
+        </div>
       </section>
     </main>
   )

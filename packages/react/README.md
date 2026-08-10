@@ -23,7 +23,7 @@ npm install @oleksiimazurenko/react-patterns @oleksiimazurenko/patterns-core
 | `@oleksiimazurenko/react-patterns/analytics` | `registerAnalytics` + `trackProps` — one delegated listener, tracked components stay server HTML. |
 | `@oleksiimazurenko/react-patterns/scroll-progress` | `<ScrollProgress>` — page progress bar, zero JS. |
 | `@oleksiimazurenko/react-patterns/sticky-shrink` | `<StickyShrink>` — sticky header that shrinks on scroll, zero JS. |
-| `@oleksiimazurenko/react-patterns/slider` | `<Slider>` — CSS scroll-snap carousel with CSS-only dots/buttons, zero JS. |
+| `@oleksiimazurenko/react-patterns/slider` | `<Slider>` — CSS scroll-snap carousel with CSS-only dots & buttons, zero JS. |
 
 ## fit-text
 
@@ -252,18 +252,19 @@ import '@oleksiimazurenko/patterns-core/slider/style.css'
 | ---- | ------- | ----------- |
 | `itemSize` | `85%` | Flex-basis of each slide (e.g. `"70%"`, `"20rem"`). |
 | `gap` | `1rem` | Gap between slides. |
+| `dotColor` | `currentColor` | Color of the pagination dots. |
 | `as` | `"ul"` | Element/tag for the track. |
 
 The track is CSS scroll-snap — swipe/trackpad works everywhere, no `'use client'`.
-The dots (with active state) and prev/next buttons are the CSS Carousel
-pseudo-elements (`::scroll-marker`, `::scroll-button`), so they're zero-JS too;
-they need Chrome 135+, and elsewhere the track still snaps. Dot color follows
-`currentColor` (set a text color on the `<Slider>`).
+The pagination dots (with an active state) and the prev/next buttons are the CSS
+Carousel pseudo-elements (`::scroll-marker`, `::scroll-button`); clicking a button
+scrolls the track natively, so they're zero-JS too. They need Chrome 135+, and
+elsewhere the track still snaps.
 
 > A carousel is the one place pure CSS can't fully match a JS library — no
 > pointer-drag with momentum, no infinite loop, no autoplay. For those, reach for
 > [Embla](https://www.embla-carousel.com/). This recipe covers snap + native
-> swipe + CSS dots/buttons.
+> swipe + CSS dots & buttons.
 
 ## License
 

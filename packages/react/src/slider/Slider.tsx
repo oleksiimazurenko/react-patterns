@@ -5,6 +5,8 @@ export interface SliderProps {
   itemSize?: string
   /** Gap between slides. Default 1rem. */
   gap?: string
+  /** Color of the pagination dots. Defaults to `currentColor`. */
+  dotColor?: string
   /** Element/tag for the track. Default "ul". */
   as?: ElementType
   className?: string
@@ -24,6 +26,7 @@ export interface SliderProps {
 export function Slider({
   itemSize,
   gap,
+  dotColor,
   as: Tag = 'ul',
   className,
   style,
@@ -32,6 +35,7 @@ export function Slider({
   const vars: Record<string, string> = {}
   if (itemSize) vars['--slider-item'] = itemSize
   if (gap) vars['--slider-gap'] = gap
+  if (dotColor) vars['--slider-dot'] = dotColor
 
   return (
     <Tag

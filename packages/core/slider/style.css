@@ -2,7 +2,8 @@
  * A carousel with ZERO runtime JS. The track is CSS scroll-snap, so native
  * swipe / trackpad works everywhere. Pagination dots (with an active state) and
  * prev/next buttons come from the CSS Carousel pseudo-elements
- * (`::scroll-marker`, `::scroll-button`) — no JS either.
+ * (`::scroll-marker`, `::scroll-button`), anchor-positioned to the track — no JS
+ * either; clicking a button scrolls the track natively.
  *
  * Where CSS Carousel isn't supported yet (non-Chromium, < Chrome 135) the track
  * still scrolls and snaps; the dots and buttons are simply absent. No library.
@@ -12,6 +13,7 @@
  * for Embla. This recipe covers snap + native swipe + CSS dots/buttons.
  */
 .slider {
+  anchor-name: --slider;
   display: flex;
   gap: var(--slider-gap, 1rem);
   overflow-x: auto;
@@ -56,29 +58,39 @@
     width: 22px;
   }
 
-  /* prev / next buttons */
+  /* prev / next buttons — anchor-positioned to the track's left/right edges.
+     The chevron is a centered background image, so it never depends on text
+     baseline / line metrics. */
   .slider::scroll-button(left),
   .slider::scroll-button(right) {
-    display: grid;
-    place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border: none;
+    position: fixed;
+    position-anchor: --slider;
+    z-index: 2;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--slider-button-border, rgba(255, 255, 255, 0.2));
     border-radius: 999px;
-    background: var(--slider-button-bg, rgba(10, 10, 10, 0.6));
-    color: var(--slider-button-fg, #fff);
-    font-size: 1.25rem;
-    line-height: 1;
+    background-color: var(--slider-button-bg, rgba(0, 0, 0, 0.6));
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40%;
     cursor: pointer;
     transition: opacity 150ms ease;
   }
   .slider::scroll-button(left) {
-    content: "\2039"; /* ‹ */
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 18l-6-6 6-6'/%3E%3C/svg%3E");
     position-area: center left;
+    margin-inline-start: 0.5rem;
   }
   .slider::scroll-button(right) {
-    content: "\203A"; /* › */
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
     position-area: center right;
+    margin-inline-end: 0.5rem;
+  }
+  .slider::scroll-button(*):focus:not(:focus-visible) {
+    outline: none;
   }
   .slider::scroll-button(*):disabled {
     opacity: 0;
