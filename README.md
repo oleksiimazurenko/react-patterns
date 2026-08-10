@@ -28,15 +28,36 @@ works during SSR.
 | **slider** | 🚧 planned | Carousel with CSS scroll-snap — no library. |
 | **analytics** | ✅ ready | One delegated `document` listener + `data-*` contracts — components stay server HTML. |
 
+## Demo
+
+A live showcase of every recipe lives in [`apps/demo`](apps/demo) — built to
+double as a Next.js 16 best-practices reference:
+
+- **Next.js 16** App Router on **Turbopack**
+- **React Compiler** (auto-memoization)
+- **Cache Components** — Partial Prerendering + the `use cache` directive
+- **`proxy.ts`** (the Next 16 rename of `middleware.ts`)
+- **Tailwind CSS v4** + **oxlint**
+
+The analytics recipe is wired the idiomatic way — one `registerAnalytics` call in
+`instrumentation-client.ts`, no component.
+
+```sh
+pnpm dev     # turbo → runs apps/demo at http://localhost:3000
+```
+
 ## Develop
 
 ```sh
 pnpm install
-pnpm build       # turbo → builds every package
+pnpm build       # turbo → builds every package + the demo
 pnpm typecheck
+pnpm lint        # oxlint
 ```
 
-Monorepo: pnpm workspaces + Turborepo + Changesets.
+Monorepo: pnpm workspaces + Turborepo + Changesets. Library code lives in
+`packages/*`; the demo app in `apps/*` (its Next/Tailwind deps never leak into
+the published packages).
 
 ### Add a recipe
 
