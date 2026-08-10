@@ -1,0 +1,21 @@
+@property --fit-text-slope {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 10;
+}
+
+.fit-text {
+  container-type: inline-size;
+}
+
+.fit-text__inner {
+  display: block;
+  font-size: clamp(
+    var(--fit-text-min, 2rem),
+    calc(var(--fit-text-slope, 10) * 1cqi),
+    var(--fit-text-max, 4.5rem)
+  );
+  text-wrap: balance;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}

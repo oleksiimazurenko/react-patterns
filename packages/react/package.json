@@ -1,0 +1,74 @@
+{
+  "name": "@oleksiimazurenko/react-patterns",
+  "version": "0.1.0",
+  "description": "A growing collection of React best practices — each recipe done with as little client JS as possible. Import the whole set or a single recipe (fit-text, parallax, accordion, slider, …).",
+  "keywords": [
+    "react",
+    "css",
+    "zero-js",
+    "server-first",
+    "patterns",
+    "best-practices",
+    "fit-text",
+    "parallax",
+    "accordion",
+    "slider"
+  ],
+  "license": "MIT",
+  "author": "Oleksii Mazurenko",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oleksiimazurenko/react-patterns.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/oleksiimazurenko/react-patterns/tree/main/packages/react#readme",
+  "bugs": {
+    "url": "https://github.com/oleksiimazurenko/react-patterns/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./fit-text": {
+      "types": "./dist/fit-text/index.d.ts",
+      "import": "./dist/fit-text/index.js",
+      "require": "./dist/fit-text/index.cjs"
+    }
+  },
+  "sideEffects": [
+    "./dist/index.js",
+    "./dist/index.cjs",
+    "./dist/**/index.js",
+    "./dist/**/index.cjs"
+  ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup && tsc -p tsconfig.build.json",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@oleksiimazurenko/patterns-core": "workspace:^"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "react": "^19.2.8",
+    "tsup": "^8.5.1",
+    "typescript": "^7.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

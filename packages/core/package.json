@@ -1,0 +1,40 @@
+{
+  "name": "@oleksiimazurenko/patterns-core",
+  "version": "0.1.0",
+  "description": "Framework-agnostic core for react-patterns — pure CSS building blocks (fit-text, parallax, accordion, slider, …) with zero runtime JS. Each recipe is a subpath export.",
+  "keywords": [
+    "css",
+    "container-queries",
+    "zero-js",
+    "server-first",
+    "patterns",
+    "fit-text",
+    "parallax",
+    "accordion",
+    "slider"
+  ],
+  "license": "MIT",
+  "author": "Oleksii Mazurenko",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oleksiimazurenko/react-patterns.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/oleksiimazurenko/react-patterns#readme",
+  "bugs": {
+    "url": "https://github.com/oleksiimazurenko/react-patterns/issues"
+  },
+  "exports": {
+    "./fit-text/style.css": "./fit-text/style.css"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "fit-text",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
