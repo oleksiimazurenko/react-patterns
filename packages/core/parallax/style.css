@@ -1,34 +1,127 @@
 /**
  * Scroll parallax with ZERO runtime JS — a pure CSS scroll-driven animation.
  *
- * The element animates along its own `view()` timeline: it sits at the `*-from`
- * offset the moment it enters the viewport and reaches `*-to` as it leaves.
- * No scroll listener, no IntersectionObserver, no rAF — the compositor drives
- * it. Renders correctly on first paint and is safe during SSR.
+ * Each element animates along its own `view()` timeline: it sits at `*-from`
+ * as it enters the viewport, passes `*-mid` at the halfway point, and reaches
+ * `*-to` as it leaves. No scroll listener, no IntersectionObserver, no rAF —
+ * the compositor drives it. Correct on first paint, safe during SSR.
  *
- * The animation is applied ONLY where `animation-timeline` is supported and the
- * user hasn't asked for reduced motion, so unsupported engines (Safari < 26,
- * Firefox without the flag) simply show the element at rest — no offset, no jump.
+ * Custom properties are registered with `@property` so they are typed and
+ * interpolatable — that is what lets `scale` and `rotate` animate, not just
+ * `translate`.
  *
- * Technique popularized by @ouvarov/scroll-parallax (MIT); reimplemented here.
+ * FALLBACK: the animation is applied ONLY inside `@supports (animation-timeline:
+ * view())` AND `@media (prefers-reduced-motion: no-preference)`. Unsupported
+ * engines (Safari < 26, Firefox without the flag) and reduced-motion users get
+ * no animation at all — the element simply rests in place, no jump, no cleanup
+ * rule needed.
+ *
+ * Technique popularized by @ouvarov/scroll-parallax (MIT, Olexandr Uvarov);
+ * reimplemented here from scratch.
  */
+
+@property --parallax-from   { syntax: "<length>"; inherits: true; initial-value: 30px; }
+@property --parallax-mid    { syntax: "<length>"; inherits: true; initial-value: 0px; }
+@property --parallax-to     { syntax: "<length>"; inherits: true; initial-value: -30px; }
+@property --parallax-opacity-from { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --parallax-opacity-mid  { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --parallax-opacity-to   { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --parallax-scale-from { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --parallax-scale-to   { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --parallax-rotate-from { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+@property --parallax-rotate-to   { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+
+@keyframes parallax-y {
+  from {
+    translate: 0 var(--parallax-from);
+    opacity: var(--parallax-opacity-from);
+    scale: var(--parallax-scale-from);
+    rotate: var(--parallax-rotate-from);
+  }
+  50% {
+    translate: 0 var(--parallax-mid);
+    opacity: var(--parallax-opacity-mid);
+  }
+  to {
+    translate: 0 var(--parallax-to);
+    opacity: var(--parallax-opacity-to);
+    scale: var(--parallax-scale-to);
+    rotate: var(--parallax-rotate-to);
+  }
+}
+
+@keyframes parallax-x {
+  from {
+    translate: var(--parallax-from) 0;
+    opacity: var(--parallax-opacity-from);
+    scale: var(--parallax-scale-from);
+    rotate: var(--parallax-rotate-from);
+  }
+  50% {
+    translate: var(--parallax-mid) 0;
+    opacity: var(--parallax-opacity-mid);
+  }
+  to {
+    translate: var(--parallax-to) 0;
+    opacity: var(--parallax-opacity-to);
+    scale: var(--parallax-scale-to);
+    rotate: var(--parallax-rotate-to);
+  }
+}
+
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .parallax {
-      animation: parallax linear both;
+      animation: parallax-y 1ms linear both;
       animation-timeline: view();
       animation-range: cover 0% cover 100%;
+    }
+    .parallax[data-axis="x"] {
+      animation-name: parallax-x;
+    }
+
+    /* Stagger: the wrapper itself is not animated — each direct child runs the
+       parallax on its own view() timeline. The reveal window comes from `range`
+       (--parallax-stagger-rs..re); the cascade offsets only the START per child
+       by --parallax-stagger × index, so every child shares the same END and
+       lands together. Caps at 24 children (beyond that they share the 24th). */
+    .parallax-stagger > * {
+      animation: parallax-y 1ms linear both;
+      animation-timeline: view();
+      animation-range-start:
+        var(--parallax-stagger-rs-name, cover)
+        calc(var(--parallax-stagger-rs, 0%) + var(--parallax-stagger, 0%) * var(--parallax-stagger-i, 0));
+      animation-range-end:
+        var(--parallax-stagger-re-name, cover)
+        var(--parallax-stagger-re, 50%);
+    }
+    .parallax-stagger[data-axis="x"] > * {
+      animation-name: parallax-x;
     }
   }
 }
 
-@keyframes parallax {
-  from {
-    translate: var(--parallax-x-from, 0px) var(--parallax-y-from, 0px);
-    opacity: var(--parallax-opacity-from, 1);
-  }
-  to {
-    translate: var(--parallax-x-to, 0px) var(--parallax-y-to, 0px);
-    opacity: var(--parallax-opacity-to, 1);
-  }
-}
+.parallax-stagger > *:nth-child(2)  { --parallax-stagger-i: 1; }
+.parallax-stagger > *:nth-child(3)  { --parallax-stagger-i: 2; }
+.parallax-stagger > *:nth-child(4)  { --parallax-stagger-i: 3; }
+.parallax-stagger > *:nth-child(5)  { --parallax-stagger-i: 4; }
+.parallax-stagger > *:nth-child(6)  { --parallax-stagger-i: 5; }
+.parallax-stagger > *:nth-child(7)  { --parallax-stagger-i: 6; }
+.parallax-stagger > *:nth-child(8)  { --parallax-stagger-i: 7; }
+.parallax-stagger > *:nth-child(9)  { --parallax-stagger-i: 8; }
+.parallax-stagger > *:nth-child(10) { --parallax-stagger-i: 9; }
+.parallax-stagger > *:nth-child(11) { --parallax-stagger-i: 10; }
+.parallax-stagger > *:nth-child(12) { --parallax-stagger-i: 11; }
+.parallax-stagger > *:nth-child(13) { --parallax-stagger-i: 12; }
+.parallax-stagger > *:nth-child(14) { --parallax-stagger-i: 13; }
+.parallax-stagger > *:nth-child(15) { --parallax-stagger-i: 14; }
+.parallax-stagger > *:nth-child(16) { --parallax-stagger-i: 15; }
+.parallax-stagger > *:nth-child(17) { --parallax-stagger-i: 16; }
+.parallax-stagger > *:nth-child(18) { --parallax-stagger-i: 17; }
+.parallax-stagger > *:nth-child(19) { --parallax-stagger-i: 18; }
+.parallax-stagger > *:nth-child(20) { --parallax-stagger-i: 19; }
+.parallax-stagger > *:nth-child(21) { --parallax-stagger-i: 20; }
+.parallax-stagger > *:nth-child(22) { --parallax-stagger-i: 21; }
+.parallax-stagger > *:nth-child(23) { --parallax-stagger-i: 22; }
+.parallax-stagger > *:nth-child(24) { --parallax-stagger-i: 23; }
+.parallax-stagger > *:nth-child(n+25) { --parallax-stagger-i: 23; }

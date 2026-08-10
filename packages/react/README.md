@@ -47,27 +47,38 @@ import '@oleksiimazurenko/patterns-core/fit-text/style.css'
 import { Parallax } from '@oleksiimazurenko/react-patterns/parallax'
 import '@oleksiimazurenko/patterns-core/parallax/style.css'
 
-// Simple: travels ±20px along Y across the viewport, zero JS.
-<Parallax amplitude={20}>
+// Simple: travels ±30px along Y across the viewport, zero JS.
+<Parallax amplitude={30}>
   <img src="/hero.jpg" alt="" />
 </Parallax>
 
-// Explicit range, horizontal, with a fade:
-<Parallax axis="x" from={40} to={-40} opacityFrom={0} opacityTo={1}>
+// Horizontal, explicit range, with a fade + scale:
+<Parallax axis="x" from={40} to={-40} opacityFrom={0} opacityTo={1} scaleFrom={0.9} scaleTo={1}>
   <Card />
+</Parallax>
+
+// Stagger direct children (each animates on its own timeline, cascading start):
+<Parallax stagger={8} amplitude={24}>
+  {items.map((i) => <Item key={i.id} {...i} />)}
 </Parallax>
 ```
 
-| Prop          | Default | Description                                                       |
-| ------------- | ------- | ----------------------------------------------------------------- |
-| `amplitude`   | `0`     | Shorthand: travels `+amplitude → -amplitude` px along `axis`.     |
-| `axis`        | `"y"`   | Axis of travel (`"x"` or `"y"`).                                  |
-| `from` / `to` | —       | Explicit start/end offset in px. Overrides `amplitude`.          |
-| `opacityFrom` / `opacityTo` | — | Fade from/to across the scroll range.                     |
-| `as`          | `"div"` | Element/tag to render.                                            |
+| Prop | Default | Description |
+| ---- | ------- | ----------- |
+| `amplitude` | `30` | Shorthand: travels `+amplitude → -amplitude` px along `axis`. |
+| `axis` | `"y"` | Axis of travel (`"x"` or `"y"`). |
+| `from` / `mid` / `to` | — | Explicit start / midpoint / end offset in px. Override `amplitude`. |
+| `opacityFrom` / `opacityMid` / `opacityTo` | — | Fade across the scroll range. |
+| `scaleFrom` / `scaleTo` | — | Scale across the scroll range. |
+| `rotateFrom` / `rotateTo` | — | Rotate (deg) across the scroll range. |
+| `stagger` | — | Animate direct children instead; start offset cascades this % per child. |
+| `range` | `cover 0% cover 100%` | Native CSS `animation-range`. |
+| `easing` | `linear` | Native CSS `animation-timing-function`. |
+| `as` | `"div"` | Element/tag to render. |
 
 Renders plain server HTML (no `'use client'`). Unsupported browsers (Safari < 26,
-Firefox without the flag) and `prefers-reduced-motion` show the element at rest.
+Firefox without the flag) and `prefers-reduced-motion` show the element at rest —
+no jump, no cleanup rule needed (the animation is gated behind `@supports`).
 
 ## License
 
