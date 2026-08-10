@@ -4,6 +4,7 @@ import { Reveal } from '@oleksiimazurenko/react-patterns/reveal'
 import { Accordion, AccordionItem } from '@oleksiimazurenko/react-patterns/accordion'
 import { trackProps } from '@oleksiimazurenko/react-patterns/analytics'
 import { StickyShrink } from '@oleksiimazurenko/react-patterns/sticky-shrink'
+import { Slider } from '@oleksiimazurenko/react-patterns/slider'
 
 import { ResizableFitText } from '@/components/ResizableFitText'
 import { ParallaxScene } from '@/components/ParallaxScene'
@@ -44,13 +45,21 @@ const THUMBS = [
   'from-indigo-400/40 to-sky-700/40',
 ]
 
+const SLIDES = [
+  { title: 'One', grad: 'from-emerald-500/60 to-teal-800/60' },
+  { title: 'Two', grad: 'from-sky-500/60 to-indigo-800/60' },
+  { title: 'Three', grad: 'from-violet-500/60 to-fuchsia-800/60' },
+  { title: 'Four', grad: 'from-amber-400/50 to-rose-700/60' },
+  { title: 'Five', grad: 'from-cyan-400/50 to-blue-800/60' },
+]
+
 // Cache Components in action: this async server component is cached (`use cache`)
 // and prerendered into the static shell — it never re-runs per request.
 async function BuiltWith() {
   'use cache'
   return (
     <p className="mt-4 font-mono text-xs text-neutral-500">
-      Next.js 16 · React Compiler · Cache Components (PPR) · Turbopack · proxy.ts
+      Next.js 16 · React Compiler · Cache Components (PPR) · Turbopack
     </p>
   )
 }
@@ -226,6 +235,27 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* slider */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <SectionHeading id="slider" kicker="recipe 08" title="slider" />
+        <p className="mb-8 max-w-2xl text-neutral-400">
+          A CSS scroll-snap track — swipe or trackpad works everywhere. The dots
+          (with active state) and the prev/next buttons come from the CSS Carousel
+          pseudo-elements, so they need no JS. Arrows and dots want Chrome 135+;
+          elsewhere the track still snaps.
+        </p>
+        <Slider itemSize="70%" gap="1rem" className="text-emerald-400">
+          {SLIDES.map((s) => (
+            <li
+              key={s.title}
+              className={`grid h-56 place-items-center rounded-2xl bg-gradient-to-br ${s.grad}`}
+            >
+              <span className="text-2xl font-semibold text-white">{s.title}</span>
+            </li>
+          ))}
+        </Slider>
       </section>
     </main>
   )

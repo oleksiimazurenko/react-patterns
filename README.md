@@ -25,7 +25,7 @@ works during SSR.
 | **parallax** | ✅ ready | Scroll parallax with `animation-timeline: view()` — no scroll listener, no JS. |
 | **reveal** | ✅ ready | Fade-and-rise into view on scroll — `view()` timeline, no IntersectionObserver, no JS. |
 | **accordion** | ✅ ready | Native `<details>` + `interpolate-size` smooth open/close; exclusive via `name` — no state, no JS. |
-| **slider** | 🚧 planned | Carousel with CSS scroll-snap — no library. |
+| **slider** | ✅ ready | Carousel — CSS scroll-snap track + CSS Carousel dots/buttons, zero JS (controls need Chrome 135+). |
 | **scroll-progress** | ✅ ready | Page progress bar driven by `scroll()` — one fixed element, no listener. |
 | **sticky-shrink** | ✅ ready | Sticky header that shrinks on scroll (`scroll()` + a registered progress var). |
 | **analytics** | ✅ ready | One delegated `document` listener + `data-*` contracts — components stay server HTML. |

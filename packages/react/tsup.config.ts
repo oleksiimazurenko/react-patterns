@@ -12,6 +12,7 @@ export default defineConfig({
     'src/analytics/index.ts',
     'src/scroll-progress/index.ts',
     'src/sticky-shrink/index.ts',
+    'src/slider/index.ts',
   ],
   format: ['esm', 'cjs'],
   // Declarations are emitted by tsc (tsconfig.build.json), not tsup's

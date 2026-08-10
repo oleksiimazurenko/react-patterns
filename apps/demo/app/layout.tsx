@@ -7,6 +7,7 @@ import '@oleksiimazurenko/patterns-core/reveal/style.css'
 import '@oleksiimazurenko/patterns-core/accordion/style.css'
 import '@oleksiimazurenko/patterns-core/scroll-progress/style.css'
 import '@oleksiimazurenko/patterns-core/sticky-shrink/style.css'
+import '@oleksiimazurenko/patterns-core/slider/style.css'
 import './globals.css'
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -28,6 +29,7 @@ const NAV = [
   ['accordion', '#accordion'],
   ['analytics', '#analytics'],
   ['sticky', '#sticky-shrink'],
+  ['slider', '#slider'],
 ] as const
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -40,7 +42,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <a href="#top" className="shrink-0 text-sm font-semibold tracking-tight">
               react-patterns
             </a>
-            <ul className="flex min-w-0 flex-1 items-center gap-x-4 gap-y-1 overflow-x-auto text-xs text-neutral-400 [-ms-overflow-style:none] [mask-image:linear-gradient(to_right,transparent,black_1.25rem,black_calc(100%_-_1.25rem),transparent)] [scrollbar-width:none] sm:flex-wrap sm:justify-end sm:[mask-image:none] [&::-webkit-scrollbar]:hidden">
+            <ul className="flex min-w-0 flex-1 items-center gap-x-4 gap-y-1 overflow-x-auto px-5 text-xs text-neutral-400 [-ms-overflow-style:none] [mask-image:linear-gradient(to_right,transparent,black_1.25rem,black_calc(100%_-_1.25rem),transparent)] [scrollbar-width:none] sm:flex-wrap sm:justify-end sm:px-0 sm:[mask-image:none] [&::-webkit-scrollbar]:hidden">
               {NAV.map(([label, href]) => (
                 <li key={href} className="shrink-0">
                   <a className="whitespace-nowrap transition hover:text-emerald-300" href={href}>

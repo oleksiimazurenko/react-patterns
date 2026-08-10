@@ -1,0 +1,87 @@
+/**
+ * A carousel with ZERO runtime JS. The track is CSS scroll-snap, so native
+ * swipe / trackpad works everywhere. Pagination dots (with an active state) and
+ * prev/next buttons come from the CSS Carousel pseudo-elements
+ * (`::scroll-marker`, `::scroll-button`) — no JS either.
+ *
+ * Where CSS Carousel isn't supported yet (non-Chromium, < Chrome 135) the track
+ * still scrolls and snaps; the dots and buttons are simply absent. No library.
+ *
+ * NOTE: a carousel is one place pure CSS can't fully match a JS library — it has
+ * no pointer-drag with momentum, no infinite loop, no autoplay. For those, reach
+ * for Embla. This recipe covers snap + native swipe + CSS dots/buttons.
+ */
+.slider {
+  display: flex;
+  gap: var(--slider-gap, 1rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slider > * {
+  flex: 0 0 var(--slider-item, 85%);
+  scroll-snap-align: center;
+}
+
+@supports (scroll-marker-group: after) {
+  .slider {
+    scroll-marker-group: after;
+  }
+
+  /* pagination dots */
+  .slider::scroll-marker-group {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-top: 1rem;
+  }
+  .slider > *::scroll-marker {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border: none;
+    border-radius: 999px;
+    background: var(--slider-dot, currentColor);
+    opacity: 0.35;
+    cursor: pointer;
+    transition: opacity 200ms ease, width 200ms ease;
+  }
+  .slider > *::scroll-marker:target-current {
+    opacity: 1;
+    width: 22px;
+  }
+
+  /* prev / next buttons */
+  .slider::scroll-button(left),
+  .slider::scroll-button(right) {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: none;
+    border-radius: 999px;
+    background: var(--slider-button-bg, rgba(10, 10, 10, 0.6));
+    color: var(--slider-button-fg, #fff);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: opacity 150ms ease;
+  }
+  .slider::scroll-button(left) {
+    content: "\2039"; /* ‹ */
+    position-area: center left;
+  }
+  .slider::scroll-button(right) {
+    content: "\203A"; /* › */
+    position-area: center right;
+  }
+  .slider::scroll-button(*):disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+}

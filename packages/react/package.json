@@ -69,6 +69,11 @@
       "types": "./dist/sticky-shrink/index.d.ts",
       "import": "./dist/sticky-shrink/index.js",
       "require": "./dist/sticky-shrink/index.cjs"
+    },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "import": "./dist/slider/index.js",
+      "require": "./dist/slider/index.cjs"
     }
   },
   "sideEffects": [

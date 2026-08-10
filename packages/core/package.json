@@ -30,7 +30,8 @@
     "./reveal/style.css": "./reveal/style.css",
     "./accordion/style.css": "./accordion/style.css",
     "./scroll-progress/style.css": "./scroll-progress/style.css",
-    "./sticky-shrink/style.css": "./sticky-shrink/style.css"
+    "./sticky-shrink/style.css": "./sticky-shrink/style.css",
+    "./slider/style.css": "./slider/style.css"
   },
   "sideEffects": [
     "*.css"
@@ -42,6 +43,7 @@
     "accordion",
     "scroll-progress",
     "sticky-shrink",
+    "slider",
     "README.md"
   ],
   "publishConfig": {
