@@ -137,7 +137,7 @@ export default function Home() {
           <code className="text-emerald-300">stagger</code> — the same recipe over
           a group; each child&apos;s entrance is offset from the last.
         </p>
-        <Parallax stagger={8} amplitude={24} className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+        <Parallax stagger={8} from={36} to={0} className="grid grid-cols-3 gap-3 sm:grid-cols-6">
           {THUMBS.map((grad) => (
             <div key={grad} className={`h-20 rounded-xl bg-gradient-to-br ${grad}`} />
           ))}
