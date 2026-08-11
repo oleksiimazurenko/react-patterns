@@ -1,14 +1,4 @@
-import {
-  type ButtonHTMLAttributes,
-  type CSSProperties,
-  type ReactNode,
-} from 'react'
-
-// `popovertarget` passed lowercase so React renders it verbatim on any version
-// (camelCase `popoverTarget` is dropped by React versions that don't map it).
-function popoverAttr(target: string): ButtonHTMLAttributes<HTMLButtonElement> {
-  return { popovertarget: target } as unknown as ButtonHTMLAttributes<HTMLButtonElement>
-}
+import { type CSSProperties, type ReactNode } from 'react'
 
 export interface PopoverProps {
   /** Unique id — referenced by `<PopoverTrigger target>`. */
@@ -51,7 +41,7 @@ export interface PopoverTriggerProps {
 /** A button that toggles the popover `target` — native, no `onClick`. */
 export function PopoverTrigger({ target, className, style, children }: PopoverTriggerProps) {
   return (
-    <button type="button" className={className} style={style} {...popoverAttr(target)}>
+    <button type="button" popoverTarget={target} className={className} style={style}>
       {children}
     </button>
   )
