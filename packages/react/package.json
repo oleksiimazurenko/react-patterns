@@ -1,6 +1,6 @@
 {
   "name": "@oleksiimazurenko/react-patterns",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A growing collection of React best practices — each recipe done with as little client JS as possible. Import the whole set or a single recipe (fit-text, parallax, accordion, slider, …).",
   "keywords": [
     "react",

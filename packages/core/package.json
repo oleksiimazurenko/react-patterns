@@ -1,6 +1,6 @@
 {
   "name": "@oleksiimazurenko/patterns-core",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Framework-agnostic core for react-patterns — pure CSS building blocks (fit-text, parallax, accordion, slider, …) with zero runtime JS. Each recipe is a subpath export.",
   "keywords": [
     "css",
