@@ -18,10 +18,27 @@ import { ScrollProgress } from "@oleksiimazurenko/react-patterns/scroll-progress
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
+const SITE = 'https://react-patterns-demo-flax.vercel.app'
+const TITLE = 'react-patterns — zero-JS React recipes'
+const DESCRIPTION =
+  'Live demos of low-JS React best practices: fit-text, parallax, reveal, accordion, delegated analytics, dialog and popover.'
+
 export const metadata: Metadata = {
-  title: 'react-patterns — zero-JS React recipes',
-  description:
-    'Live demos of low-JS React best practices: fit-text, parallax, reveal, accordion, and delegated analytics.',
+  metadataBase: new URL(SITE),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE,
+    siteName: 'react-patterns',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 }
 
 const NAV = [
