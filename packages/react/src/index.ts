@@ -15,3 +15,17 @@ export {
 export { ScrollProgress, type ScrollProgressProps } from './scroll-progress'
 export { StickyShrink, type StickyShrinkProps } from './sticky-shrink'
 export { Slider, type SliderProps } from './slider'
+export {
+  Dialog,
+  DialogTrigger,
+  DialogClose,
+  type DialogProps,
+  type DialogTriggerProps,
+  type DialogCloseProps,
+} from './dialog'
+export {
+  Popover,
+  PopoverTrigger,
+  type PopoverProps,
+  type PopoverTriggerProps,
+} from './popover'

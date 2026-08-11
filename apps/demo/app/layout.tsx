@@ -8,6 +8,8 @@ import '@oleksiimazurenko/patterns-core/accordion/style.css'
 import '@oleksiimazurenko/patterns-core/scroll-progress/style.css'
 import '@oleksiimazurenko/patterns-core/sticky-shrink/style.css'
 import '@oleksiimazurenko/patterns-core/slider/style.css'
+import '@oleksiimazurenko/patterns-core/dialog/style.css'
+import '@oleksiimazurenko/patterns-core/popover/style.css'
 import './globals.css'
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -30,6 +32,8 @@ const NAV = [
   ['analytics', '#analytics'],
   ['sticky', '#sticky-shrink'],
   ['slider', '#slider'],
+  ['dialog', '#dialog'],
+  ['popover', '#popover'],
 ] as const
 
 export default function RootLayout({ children }: { children: ReactNode }) {

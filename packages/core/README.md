@@ -20,6 +20,8 @@ as possible. Each recipe ships as its own subpath so you import only what you us
 | `@oleksiimazurenko/patterns-core/scroll-progress/style.css` | Page progress bar via `scroll()` — one fixed element, zero JS. |
 | `@oleksiimazurenko/patterns-core/sticky-shrink/style.css` | Sticky header that shrinks on scroll via `scroll()` + a progress var — zero JS. |
 | `@oleksiimazurenko/patterns-core/slider/style.css` | Carousel — scroll-snap track + CSS Carousel dots & prev/next buttons — zero JS. |
+| `@oleksiimazurenko/patterns-core/dialog/style.css` | Native `<dialog>` modal styling + CSS open/close animation — zero JS. |
+| `@oleksiimazurenko/patterns-core/popover/style.css` | Native popover (menu/dropdown) styling + anchor positioning — zero JS. |
 
 ## fit-text
 

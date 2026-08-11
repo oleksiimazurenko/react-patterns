@@ -26,6 +26,8 @@ npm install @oleksiimazurenko/react-patterns @oleksiimazurenko/patterns-core
 | `@oleksiimazurenko/react-patterns/scroll-progress` | `<ScrollProgress>` — page progress bar, zero JS. |
 | `@oleksiimazurenko/react-patterns/sticky-shrink` | `<StickyShrink>` — sticky header that shrinks on scroll, zero JS. |
 | `@oleksiimazurenko/react-patterns/slider` | `<Slider>` — CSS scroll-snap carousel with CSS-only dots & buttons, zero JS. |
+| `@oleksiimazurenko/react-patterns/dialog` | `<Dialog>` / `<DialogTrigger>` / `<DialogClose>` — native modal, zero JS. |
+| `@oleksiimazurenko/react-patterns/popover` | `<Popover>` / `<PopoverTrigger>` — native menu/dropdown, zero JS. |
 
 ## fit-text
 
@@ -279,6 +281,53 @@ elsewhere the track still snaps.
 > pointer-drag with momentum, no infinite loop, no autoplay. For those, reach for
 > [Embla](https://www.embla-carousel.com/). This recipe covers snap + native
 > swipe + CSS dots & buttons.
+
+## dialog
+
+```tsx
+import { Dialog, DialogTrigger, DialogClose } from '@oleksiimazurenko/react-patterns/dialog'
+import '@oleksiimazurenko/patterns-core/dialog/style.css'
+
+<DialogTrigger target="hello">Open</DialogTrigger>
+
+<Dialog id="hello">
+  <h2>Native dialog</h2>
+  <p>Modal, backdrop, Esc and focus are all the browser's.</p>
+  <DialogClose target="hello">Close</DialogClose>
+</Dialog>
+```
+
+Opened/closed by the HTML **invoker commands** (`command="show-modal"` /
+`command="close"` with `commandfor`), so there's **no `onClick`** — zero JS.
+The modal, backdrop, Esc-to-close and focus trap are native. **Clicking the
+backdrop closes it too**, natively, via the `closedby="any"` attribute (the
+default here) — still zero JS. The enter/exit animation is pure CSS
+(`@starting-style`). Invoker commands need Chrome 135+, `closedby` Chrome 134+.
+Style via `--dialog-bg` / `--dialog-fg` / `--dialog-border` / `--dialog-radius` /
+`--dialog-backdrop` (or a `className`).
+
+## popover
+
+```tsx
+import { Popover, PopoverTrigger } from '@oleksiimazurenko/react-patterns/popover'
+import '@oleksiimazurenko/patterns-core/popover/style.css'
+
+<PopoverTrigger target="menu">Open menu ▾</PopoverTrigger>
+
+<Popover id="menu">
+  <button>Profile</button>
+  <button>Settings</button>
+  <button>Sign out</button>
+</Popover>
+```
+
+The native **Popover API** (`popovertarget` + `popover`): toggle, click-outside
+dismiss and the top layer are native, so it's **zero JS**. It auto-anchors to its
+trigger (implicit anchor) and is placed with CSS anchor positioning; the
+animation is pure CSS. The Popover API is widely supported; anchor positioning
+needs Chrome 125+ (without it the popover still opens, just centered). Style via
+`--popover-bg` / `--popover-fg` / `--popover-border` / `--popover-area` (placement,
+e.g. `top`, `bottom span-left`) / `--popover-gap`.
 
 ## License
 

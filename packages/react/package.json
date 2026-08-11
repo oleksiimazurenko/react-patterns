@@ -74,6 +74,16 @@
       "types": "./dist/slider/index.d.ts",
       "import": "./dist/slider/index.js",
       "require": "./dist/slider/index.cjs"
+    },
+    "./dialog": {
+      "types": "./dist/dialog/index.d.ts",
+      "import": "./dist/dialog/index.js",
+      "require": "./dist/dialog/index.cjs"
+    },
+    "./popover": {
+      "types": "./dist/popover/index.d.ts",
+      "import": "./dist/popover/index.js",
+      "require": "./dist/popover/index.cjs"
     }
   },
   "sideEffects": [

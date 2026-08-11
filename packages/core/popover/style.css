@@ -1,0 +1,49 @@
+/**
+ * A popover (menu / dropdown / tooltip) with ZERO runtime JS — the native
+ * Popover API (`<button popovertarget="id">` + `<div id="id" popover>`). Toggle,
+ * light-dismiss (click outside / Esc) and the top layer are all native. The
+ * popover auto-anchors to its invoker (implicit anchor) and is placed with CSS
+ * anchor positioning; the enter/exit animation is pure CSS (`@starting-style` +
+ * `allow-discrete`).
+ *
+ * The Popover API is widely supported; CSS anchor positioning needs Chrome 125+/
+ * modern engines — without it the popover still opens/closes, just centered
+ * rather than anchored.
+ */
+.popover {
+  position: absolute;
+  position-area: var(--popover-area, bottom span-right);
+  margin: var(--popover-gap, 6px) 0 0 0;
+  min-width: var(--popover-min, 12rem);
+  padding: var(--popover-padding, 6px);
+  border: 1px solid var(--popover-border, color-mix(in oklab, CanvasText 12%, transparent));
+  border-radius: var(--popover-radius, 12px);
+  background: var(--popover-bg, Canvas);
+  color: var(--popover-fg, CanvasText);
+  box-shadow: var(--popover-shadow, 0 12px 32px rgb(0 0 0 / 0.18));
+
+  /* enter/exit */
+  opacity: 0;
+  translate: 0 -6px;
+  transition:
+    opacity 160ms ease,
+    translate 160ms ease,
+    overlay 160ms ease allow-discrete,
+    display 160ms ease allow-discrete;
+}
+.popover:popover-open {
+  opacity: 1;
+  translate: 0 0;
+}
+@starting-style {
+  .popover:popover-open {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popover {
+    transition: none;
+  }
+}

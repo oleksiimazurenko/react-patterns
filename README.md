@@ -30,6 +30,8 @@ works during SSR.
 | **reveal** | ✅ ready | Fade-and-rise into view on scroll — `view()` timeline, no IntersectionObserver, no JS. |
 | **accordion** | ✅ ready | Native `<details>` + `interpolate-size` smooth open/close; exclusive via `name` — no state, no JS. |
 | **slider** | ✅ ready | Carousel — CSS scroll-snap track + CSS Carousel dots & prev/next buttons, zero JS (controls need Chrome 135+). |
+| **dialog** | ✅ ready | Native `<dialog>` modal via HTML invoker commands — backdrop/Esc/focus native, zero JS (Chrome 135+). |
+| **popover** | ✅ ready | Native Popover API menu/dropdown, auto-anchored — zero JS (Chrome 125+). |
 | **scroll-progress** | ✅ ready | Page progress bar driven by `scroll()` — one fixed element, no listener. |
 | **sticky-shrink** | ✅ ready | Sticky header that shrinks on scroll (`scroll()` + a registered progress var). |
 | **analytics** | ✅ ready | One delegated `document` listener + `data-*` contracts — components stay server HTML. |

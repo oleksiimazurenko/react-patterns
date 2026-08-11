@@ -5,6 +5,8 @@ import { Accordion, AccordionItem } from '@oleksiimazurenko/react-patterns/accor
 import { trackProps } from '@oleksiimazurenko/react-patterns/analytics'
 import { StickyShrink } from '@oleksiimazurenko/react-patterns/sticky-shrink'
 import { Slider } from '@oleksiimazurenko/react-patterns/slider'
+import { Dialog, DialogTrigger, DialogClose } from '@oleksiimazurenko/react-patterns/dialog'
+import { Popover, PopoverTrigger } from '@oleksiimazurenko/react-patterns/popover'
 
 import { ResizableFitText } from '@/components/ResizableFitText'
 import { ParallaxScene } from '@/components/ParallaxScene'
@@ -53,17 +55,6 @@ const SLIDES = [
   { title: 'Five', grad: 'from-cyan-400/50 to-blue-800/60' },
 ]
 
-// Cache Components in action: this async server component is cached (`use cache`)
-// and prerendered into the static shell — it never re-runs per request.
-async function BuiltWith() {
-  'use cache'
-  return (
-    <p className="mt-4 font-mono text-xs text-neutral-500">
-      Next.js 16 · React Compiler · Cache Components (PPR) · Turbopack
-    </p>
-  )
-}
-
 export default function Home() {
   return (
     <main id="top">
@@ -76,7 +67,6 @@ export default function Home() {
           A growing collection of recipes done with pure CSS or a single delegated
           listener. Scroll down — everything you see below runs on the platform.
         </p>
-        <BuiltWith />
         <div className="mt-8 flex justify-center gap-3">
           <a
             href="#fit-text"
@@ -275,6 +265,71 @@ export default function Home() {
             className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-8 bg-gradient-to-l from-neutral-950 to-transparent"
           />
         </div>
+      </section>
+
+      {/* dialog */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <SectionHeading id="dialog" kicker="recipe 09" title="dialog" />
+        <p className="mb-8 max-w-2xl text-neutral-400">
+          A native <code className="text-emerald-300">&lt;dialog&gt;</code> opened by the HTML invoker commands
+          (<code className="text-emerald-300">command=&quot;show-modal&quot;</code>) — modal, backdrop, Esc, and
+          <strong> backdrop-click to close</strong> (<code className="text-emerald-300">closedby=&quot;any&quot;</code>) all native.
+          Zero JS, no <code className="text-emerald-300">onClick</code>. Needs Chrome 135+.
+        </p>
+        <DialogTrigger
+          target="demo-dialog"
+          className="rounded-full bg-emerald-400 px-5 py-2.5 text-sm font-medium text-neutral-950 transition hover:bg-emerald-300"
+        >
+          Open dialog
+        </DialogTrigger>
+        <Dialog
+          id="demo-dialog"
+          className="[--dialog-bg:#0f1110] [--dialog-border:rgba(255,255,255,0.1)] [--dialog-fg:#f4f6f5]"
+        >
+          <h3 className="text-lg font-semibold">Native dialog</h3>
+          <p className="mt-2 text-sm text-neutral-400">
+            Opened and closed with zero JavaScript — the browser handles the modal,
+            backdrop, Esc and focus. The animation is pure CSS (@starting-style).
+          </p>
+          <div className="mt-6 flex justify-end">
+            <DialogClose
+              target="demo-dialog"
+              className="rounded-lg border border-white/15 px-4 py-2 text-sm transition hover:border-white/40"
+            >
+              Close
+            </DialogClose>
+          </div>
+        </Dialog>
+      </section>
+
+      {/* popover */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <SectionHeading id="popover" kicker="recipe 10" title="popover" />
+        <p className="mb-8 max-w-2xl text-neutral-400">
+          A native popover (menu / dropdown) via the Popover API — toggle,
+          click-outside dismiss and the top layer are native, and it auto-anchors
+          to the button with CSS anchor positioning. Zero JS. Needs Chrome 125+.
+        </p>
+        <PopoverTrigger
+          target="demo-popover"
+          className="rounded-lg border border-white/15 px-4 py-2 text-sm transition hover:border-emerald-300 hover:text-emerald-300"
+        >
+          Open menu ▾
+        </PopoverTrigger>
+        <Popover
+          id="demo-popover"
+          className="flex flex-col [--popover-bg:#0f1110] [--popover-border:rgba(255,255,255,0.1)] [--popover-fg:#f4f6f5]"
+        >
+          {['Profile', 'Settings', 'Sign out'].map((item) => (
+            <button
+              key={item}
+              type="button"
+              className="rounded-md px-3 py-2 text-left text-sm text-neutral-300 transition hover:bg-white/5"
+            >
+              {item}
+            </button>
+          ))}
+        </Popover>
       </section>
     </main>
   )
